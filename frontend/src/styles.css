@@ -1,0 +1,74 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+Header{
+    background-color: red;
+    text-align: center;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.container{
+    margin-top: 1em;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 4em;
+}
+
+.img{
+    width: 4rem;
+    height: 4rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+#carouselExampleFade{
+    background-color: red;
+    width: 65vw;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Carrousel{
+    display: flex;
+    flex-direction: column;
+    background-color: lawngreen;
+    height: 90vh;
+    align-items: center;
+    justify-content: center
+}
+
+.foto{
+    margin: 12px auto;
+    width: 30vw;
+    height: 38vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedorDeFoto{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+    color: white;
+    background-color: black;
+}
