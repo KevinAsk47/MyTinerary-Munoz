@@ -2,7 +2,8 @@ import React  from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Invitados from '../components/Main';
-import Carrousel from '../components/Carrousel';
+import Carruaje from '../components/Carruaje'
+/* import Carrousel from '../components/Carrousel'; */
 
 export default class Home extends React.Component {
     render(){
@@ -20,7 +21,7 @@ export default class Home extends React.Component {
                 {misInvitados.map((invitado) => {
                     return <Invitados key={invitado.id} invitado = {invitado} />
                 })}
-                <Carrousel />
+                <Carruaje />
                 <Footer />
             </>
         )

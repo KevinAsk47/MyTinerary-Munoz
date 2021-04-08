@@ -14,6 +14,7 @@ Header{
 
 .container{
     margin-top: 1em;
+    margin-bottom: 1em;
     background-color: red;
     display: flex;
     align-items: center;
@@ -71,4 +72,24 @@ footer{
     height: 20vh;
     color: white;
     background-color: black;
+}
+
+.boton{
+    width: 4rem;
+}
+
+.logoyeslogan{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 2em 5em 0 0;
+}
+
+.logoyeslogan img{
+    width: 25vw;
+}
+
+#fotaso{
+    height: 60vh;
+    width: 100vw;
 }
