@@ -1,21 +1,21 @@
 import React from 'react';
 
-const Slide = ({arrayCiudad}) => {
-
-    console.log(arrayCiudad)
+const Slide = ({arrayItem}) => {
 
     return( 
-<div>
-        {
-            arrayCiudad.map((ciudad) => {
-                return (<div className="contenedorDeFoto">
 
-                <div className="foto" style={{backgroundImage: `url(${ciudad.imagen})`}}></div>
-    
+    <div className="contenedorDeFoto">
+        {
+            arrayItem.map((ciudad) => {
+                return (
+                <div className="contenedorDeFoto">
+
+                    <div className="foto" style={{backgroundImage: `url(${ciudad.imagen})`}}></div>
+
                 </div>)
             })
         }
-     </div>
+    </div>
 
 
 

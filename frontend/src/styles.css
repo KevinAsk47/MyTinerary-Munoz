@@ -12,6 +12,22 @@ Header{
     background-size: cover;
 }
 
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2em 0 2em;
+}
+
+.nav > *{
+    display: flex;
+    justify-content: space-between;
+}
+
+.enlaces > *{
+    margin: 0 1em 0 1em;
+}
+
 .container{
     margin-top: 1em;
     margin-bottom: 1em;
@@ -31,7 +47,7 @@ Header{
 
 }
 
-#carouselExampleFade{
+.carousel{
     background-color: red;
     width: 65vw;
     height: 85vh;
@@ -40,7 +56,7 @@ Header{
     justify-content: center;
 }
 
-.Carrousel{
+.contenedorCarrousel{
     display: flex;
     flex-direction: column;
     background-color: lawngreen;
@@ -65,7 +81,7 @@ Header{
     justify-content: space-evenly;
 }
 
-footer{
+.footerInfo{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,7 +105,4 @@ footer{
     width: 25vw;
 }
 
-#fotaso{
-    height: 60vh;
-    width: 100vw;
-}
+

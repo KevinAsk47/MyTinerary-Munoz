@@ -1,41 +1,35 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 const Header = () => {
     return(
         <header style={{backgroundImage: `url(https://image.freepik.com/vector-gratis/aviones-papel-volando-lineas-diseno-particulas-estilo_41814-315.jpg)`}}>
             <nav>
-                <ul className="nav justify-content-end">
-                    <li class="nav-item">
-                        <a className="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a className="nav-link" href="#">Cities</a>
-                    </li>
+                <div className="nav">
+ 
+                <div className="login">
+                    <img src="./img/user.svg" alt=""/>
+                </div>
 
-                    <div class="dropdown">
-                        <img src="./img/user.svg" alt=""/>
+                <div className="enlaces">
+                <NavLink exact to="/"><p>Home</p></NavLink>
 
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <NavLink to="/Cities"><p>Cities</p></NavLink>
+                </div>
 
-                    </a>
+            </div>
 
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                    </div>
-                    
-                </ul>
             </nav>
             <div className="logoyeslogan">
                 <div>
-                    <img className="logo" src="./img/logo.png" alt=""/>
+                    <img className="logo" src="./img/logoDos.png" alt=""/>
                 </div>
                 <div>
-                    <h3>Find your perfect trip, designed by insiders who knows and love their cities!</h3>
+                    <h5>Find your perfect trip, designed by insiders who knows and love their cities!</h5>
+                    <p>GOOD!</p>
                 </div>
-                <button type="button" class="btn btn-outline-success">Success</button>
+                <NavLink to="/Cities"><button type="button" class="btn btn-outline-success">Success</button></NavLink>
+                
             </div>
         </header>   
     )
