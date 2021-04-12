@@ -1,10 +1,27 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
     return(
-        <footer>
+        <footer style={{backgroundImage: `url(./img/avionFooter.jpg)`}}>
             <div className="footerInfo">
-            <h3>Próximamente Un Footer</h3>
+                <ul className="nav flex-column">
+                    <li className="nav-item">
+                        <NavLink exact to="/"><a href="" className="nav-link">Home</a></NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/Cities"><a href="" className="nav-link" >Cities</a></NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link">Log in</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link">Sign up</a>
+                    </li>
+                </ul>
+            </div>
+            <div className="footerFinal">
+                <p>► All rights reserved | Kevin Muñoz ◄</p>
             </div>
         </footer>
     )

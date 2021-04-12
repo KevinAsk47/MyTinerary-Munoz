@@ -6,11 +6,13 @@ const Slide = ({arrayItem}) => {
 
     <div className="contenedorDeFoto">
         {
-            arrayItem.map((ciudad) => {
+            arrayItem.map((ciudad,index) => {
                 return (
-                <div className="contenedorDeFoto">
+                <div key={index} className="contenedorDeFoto">
 
-                    <div className="foto" style={{backgroundImage: `url(${ciudad.imagen})`}}></div>
+                    <div key={ciudad.id}  className="foto" style={{backgroundImage: `url(${ciudad.imagen})`}}>
+                        <h4 className="titulo" >{ciudad.titulo}</h4>
+                    </div>
 
                 </div>)
             })
