@@ -83,8 +83,7 @@ const Header = () => {
                         <h4 id="text">Click to start the adventure!</h4>
                     </div>
                 </div>
-                <NavLink to="/Cities"><button type="button" id="callToAction" className="btn callToAction btn-outline-success">Start</button></NavLink>
-
+                <NavLink to="/Cities"><button type="button" id="callToAction" className="btn callToAction btn-outline-success" onClick={window.scroll(0,0)}>Start</button></NavLink>
             </div>
             <div>
                 <div className="videoEntrada">

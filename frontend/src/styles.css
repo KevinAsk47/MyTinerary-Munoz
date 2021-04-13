@@ -62,7 +62,7 @@ video{
 }
 
 .carousel{
-    width: 65vw;
+    width: 98%;
     height: 85vh;
     display: flex;
     align-items: center;
@@ -81,7 +81,7 @@ video{
 }
 
 .foto{
-    margin: 12px auto;
+    margin: 20px 20px 20px 20px;
     width: 30vw;
     height: 38vh;
     background-position: center;
@@ -91,11 +91,15 @@ video{
     border-radius: 10px;
 }
 
+.foto:hover{
+    transform: scale(1.1);
+}
+
 .contenedorDeFoto{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .titulo{
@@ -111,7 +115,8 @@ video{
 }
 
 .prev{
-    background-color: black;
+    background-color: black; 
+    color: darkblue;
 }
 
 footer{

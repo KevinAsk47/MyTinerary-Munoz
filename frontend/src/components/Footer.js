@@ -7,10 +7,10 @@ const Footer = () => {
             <div className="footerInfo">
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                        <NavLink exact to="/"><a href="" className="nav-link">Home</a></NavLink>
+                        <NavLink exact to="/"><a href="" className="nav-link" onClick={window.scroll(0,0)}>Home</a></NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/Cities"><a href="" className="nav-link" >Cities</a></NavLink>
+                        <NavLink to="/Cities"><a href="" className="nav-link" onClick={window.scroll(0,0)}>Cities</a></NavLink>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link">Log in</a>
