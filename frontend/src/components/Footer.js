@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
     return(
-        <footer style={{backgroundImage: `url(./img/avionFooter.jpg)`}}>
+        <footer style={{backgroundImage: `url(/img/avionFooter.jpg)`}}>
             <div className="footerInfo">
                 <ul className="nav flex-column">
                     <li className="nav-item">

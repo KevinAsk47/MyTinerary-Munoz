@@ -172,45 +172,126 @@ footer{
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin: 2em 0 2em 0;
 }
 
 .card{
     height: 45vh;
     width: 30vw;
-    margin: 10px 10px 10px 10px;
-    border-radius: 10px;
+    margin: 14px 10px 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .cardImg{
     height: 100%;
     width: 100%;
-    border: black solid 3px;
-    border-radius: 10px;
+    border: black solid 1px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 1);
+    text-decoration: none;
 }
 
 .card:hover{
-    transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.card:hover .estrella{
+  opacity: 1;
+}
+
+.estrella{
+  position: absolute;
+  width: 25px;
+  margin-left: 10px;
+  margin-top: 10px;
+  opacity: 0;
 }
 
 .filtro{
-    height: 20vh;
-    background-color: darkviolet;
+    height: 30vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+form{
+  height: 25vh;
+  width: 60vw;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+}
+
 .title{
     background-color: rgba(255,255,255,0.5);
     text-align: center;
-    margin-top: 6em;
+    margin-top: 8em;
+    text-decoration: none;
+    color: black;
+    text-decoration: none;
+    font-family: 'Anton', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.initeraryMain{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner{
+  height: 70vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tituloBanner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgba(0,0,0,0.6);
+  text-align: center;
+  max-width: 60vw;
+  max-height: 30vh;
+}
+
+.itineraryButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2em 0 2em 0;
+}
+
+.button{
+  margin: 0 1em 0 1em;
+  min-height: 7vh;
+  min-width: 12vw;
+  border-radius: 20px;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  box-shadow: black 2px 2px 2px 0px;
+  color: white;
+  font-weight: bold;
+}
+
+.buscaTuCiudad{
+  font-family: 'Anton', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  padding-top: 30px;
 }
 
 /* Planet */
@@ -297,5 +378,46 @@ footer{
     -webkit-animation: mapback_spin 15s linear infinite;
     animation: mapback_spin 15s linear infinite;
   }
+
+/* preload */
+
+.centered{
+	width:400px;
+	height:400px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	background:#000;
+	filter: blur(10px) contrast(20);
+}
+.blob-1,.blob-2{
+	width:70px;
+	height:70px;
+	position:absolute;
+	background:#fff;
+	border-radius:50%;
+	top:50%;left:50%;
+	transform:translate(-50%,-50%);
+}
+.blob-1{
+	left:20%;
+	animation:osc-l 2.5s ease infinite;
+}
+.blob-2{
+	left:80%;
+	animation:osc-r 2.5s ease infinite;
+	background:#0ff;
+}
+@keyframes osc-l{
+	0%{left:20%;}
+	50%{left:50%;}
+	100%{left:20%;}
+}
+@keyframes osc-r{
+	0%{left:80%;}
+	50%{left:50%;}
+	100%{left:80%;}
+}
 
 

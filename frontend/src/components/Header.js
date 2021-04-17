@@ -34,7 +34,7 @@ const Header = () => {
                                 <NavLink to="">Sign Up</NavLink>
                             </NavItem>
                         </Nav>
-                        <img src="./img/user.svg" alt="user" />
+                        <img src="/img/user.svg" alt="user" />
                     </Collapse>
                 </Navbar>
             </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Ciudad from './Ciudad';
+import {gsap} from 'gsap';
 
 const Main = () => {
 
@@ -55,10 +56,11 @@ const Main = () => {
 
     if (city.loading === false) {
        return (
-        <div className="itinerarios">
-            <div className="spinner-grow text-success" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </div>
+        <div className="main">
+            <div class = "centered">
+                <div class = "blob-1"></div>
+                <div class = "blob-2"></div>
+            </div>         
         </div>
        )
     }
@@ -71,12 +73,13 @@ const Main = () => {
             </div>
             <div className="filtro">
                 <form>
-                <input id="text" type="text" onChange={input} />
+                    <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
+                    <input id="textInput" style={{width: "50vw"}} type="text" onChange={input} />
                 </form>
             </div>
             <div className="itinerarios">
                 {
-                   city.data.length === 0 ? <div className="card"><h1>No hay resultados</h1></div> : city.data.map((ciudad) => {return <Ciudad key={ciudad.id} ciudad={ciudad} />})
+                   city.data.length === 0 ? <img src="./img/noResult.gif" alt=""/> : city.data.map((ciudad) => {return <Ciudad key={ciudad._id} ciudad={ciudad} />})
                 }
             </div>
         </main>

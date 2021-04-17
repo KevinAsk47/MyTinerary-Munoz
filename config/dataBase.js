@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://kevinask47:k49312629@cluster0.ffp2n.mongodb.net/mytineray?retryWrites=true&w=majority', {
+mongoose.connect(process.env.URI_US, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
