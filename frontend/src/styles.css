@@ -129,7 +129,7 @@ footer{
 .footerInfo{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     height: 40vh;
     color: white;
     text-align: center;
@@ -549,6 +549,9 @@ p{
   }
   .enConstrucion{
     width: 60vw;
+  }
+  .logoFooter{
+    display: none;
   }
 }
 

@@ -11,9 +11,7 @@ const Main = () => {
 
     const [error, setError] = useState(false)
 
-    const [copiaOriginal, setCopiaOriginal] = useState({
-        original: [],
-    })
+    const [copiaOriginal, setCopiaOriginal] = useState([])
 
     useEffect(() => {
 
@@ -45,9 +43,7 @@ const Main = () => {
                     loading: true,
                 })
     
-                setCopiaOriginal({
-                    original: data.respuesta,
-                })
+                setCopiaOriginal(data.respuesta)
             }
 
 
@@ -63,7 +59,7 @@ const Main = () => {
 
         var input = e.target.value.toLocaleLowerCase().trim()
 
-        var ciudadesFiltrados = copiaOriginal.original.filter((ciudad) => ciudad.titulo.toLocaleLowerCase().trim().indexOf(input) === 0)
+        var ciudadesFiltrados = copiaOriginal.filter((ciudad) => ciudad.titulo.toLocaleLowerCase().trim().indexOf(input) === 0)
 
         setCity({
             data: ciudadesFiltrados,
