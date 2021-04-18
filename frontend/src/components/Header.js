@@ -16,7 +16,8 @@ const Header = () => {
 
     return (
         <div>
-            <div className="hola">
+            <div>
+            <img id="userOff" src="/img/user.svg" alt="user"/>
                 <Navbar className="hola" color="#f1f1f1" light expand="md">
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
@@ -34,7 +35,6 @@ const Header = () => {
                                 <NavLink to="">Sign Up</NavLink>
                             </NavItem>
                         </Nav>
-                        <img src="/img/user.svg" alt="user" />
                     </Collapse>
                 </Navbar>
             </div>

@@ -11,6 +11,7 @@ const Itinerary = ({ciudad}) => {
         scaleX: 2
         
     });
+    
     gsap.to("#pink", {
         duration: 1, 
         rotationY: 360,
@@ -30,11 +31,11 @@ const Itinerary = ({ciudad}) => {
                 <div className="tituloBanner">
                     <h2 id="ciudadIndividual">{ciudad.titulo}</h2>
                     <h2>{ciudad.pais}</h2>
-                    <p style={{padding: '0 1em 0 1em'}}>{ciudad.descripcion}</p>
+                    <p className="descripcion" style={{padding: '0 1em 0 1em'}}>{ciudad.descripcion}</p>
                 </div>
             </div>
             <div className="initeraryMain">
-                <img src="/img/const.png" alt=""/>
+                <img className="enConstrucion" src="/img/const.png" alt=""/>
             </div>
             <div className="itineraryButton">
                 <NavLink to="/Cities"><button className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>

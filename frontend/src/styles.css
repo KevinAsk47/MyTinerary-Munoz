@@ -120,7 +120,9 @@ video{
 }
 
 footer{
-    background-position-y: 20%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
 }
 
@@ -145,13 +147,12 @@ footer{
     display: flex;
     justify-content: center;
     height: 30px;
-    color: white;
+    color: black;
 }
 
 .main{
     background-color: black;
     height: 80vh;
-    background-image: url(https://p4.wallpaperbetter.com/wallpaper/743/891/712/starry-sky-4k-8k-wallpaper-preview.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -159,12 +160,23 @@ footer{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #f1f1f1;
 }
 
 .tituloCity{
     position: absolute;
     z-index: 6;
     color: black;
+    background-color: black;
+    min-height: 30vh;
+    width: 60%;
+    background-color: rgba(255,255,255,0.5);
+    font-family: 'Dela Gothic One', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(47, 74, 226);
+    border-radius: 10px;
 }
 
 .itinerarios{
@@ -265,8 +277,8 @@ form{
   color: white;
   background-color: rgba(0,0,0,0.6);
   text-align: center;
-  max-width: 60vw;
-  max-height: 30vh;
+  width: 60vw;
+  height: 35vh;
 }
 
 .itineraryButton{
@@ -292,6 +304,29 @@ form{
   font-family: 'Anton', sans-serif;
   font-family: 'Josefin Sans', sans-serif;
   padding-top: 30px;
+}
+
+#ciudadIndividual{
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 3ch;
+  color: aquamarine;
+}
+
+p{
+  font-family: 'Inconsolata', monospace;
+  font-family: 'RocknRoll One', sans-serif;
+}
+
+.preloader{
+  background-color: white;
+  height: 80vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Planet */
@@ -395,7 +430,7 @@ form{
 	width:70px;
 	height:70px;
 	position:absolute;
-	background:#fff;
+	background: black;
 	border-radius:50%;
 	top:50%;left:50%;
 	transform:translate(-50%,-50%);
@@ -420,4 +455,127 @@ form{
 	100%{left:80%;}
 }
 
+/* tipeo*/
 
+.middle{
+  transform: translate(-0%,-0%);
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255,255,255,0.5);
+
+}
+
+.btn{
+  position: relative;
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-family: "montserrat";
+  text-decoration: none;
+  border: 2px solid #ff7675;
+  padding: 14px 60px;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 1s all ease;
+}
+.btn::before{
+  background: #ff7675;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+  transition: all 0.6s ease;
+}
+
+.btn1::before{
+  width: 0%;
+  height: 100%;
+}
+
+.btn1:hover::before{
+  width: 100%;
+}
+
+
+.btn2::before{
+  width: 100%;
+  height: 0%;
+}
+.btn2:hover::before{
+  height: 100%;
+}
+
+.btn3::before{
+  width: 100%;
+  height: 0%;
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+.btn3:hover::before{
+  height: 380%;
+}
+
+.btn4::before{
+  width: 100%;
+  height: 0%;
+  transform: translate(-50%,-50%) rotate(-45deg);
+}
+.btn4:hover::before{
+  height: 380%;
+}
+
+/* media */
+
+@media (max-width:576px){
+
+  .tituloCity{
+    width: 100%;
+  }
+  .card{
+    width: 85vw;
+  }
+  form{
+    width: 100vw;
+  }
+  .descripcion{
+    display: none;
+  }
+  #ciudadIndividual{
+    font-size: 20px;
+  }
+  .tituloBanner{
+    width: 100%;
+  }
+  .enConstrucion{
+    width: 60vw;
+  }
+}
+
+#userOff{
+  margin: 5px 10px 0 0;
+  position: absolute;
+  top: 0;
+  right: 0%;
+}
+
+@media (min-width:576px){
+
+  .textTip{
+    font-size: 90px;
+  }
+
+}
+
+.serverCaido{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ff7675;
+}
+
+.serverCaido img{
+  max-width: 100%;
+}
