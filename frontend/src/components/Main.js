@@ -23,10 +23,7 @@ const Main = () => {
             if (!data.success) {
                 console.log(data.repuesta)               
             } else{
-                setCity({
-                    data: data.respuesta,
-                    loading: false,
-                })
+                setCity({data: data.respuesta, loading: false})
                 setCopiaOriginal(data.respuesta)
             }
         } catch (error) {
@@ -89,12 +86,12 @@ const Main = () => {
             <div className="filtro">
                 <form>
                     <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
-                    <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "5px 0 5px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={input} />
+                    <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "6px 0 6px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={input} />
                 </form>
             </div>
             <div className="itinerarios">
                 {
-                    city.data.length === 0 ? <img src="./img/noResult.gif" alt="" /> : city.data.map((ciudad) => { return <Ciudad key={ciudad._id} ciudad={ciudad} /> })
+                    city.data.length === 0 ? <img className="notFound" src="./img/notFound.gif" alt="" /> : city.data.map((ciudad) => { return <Ciudad key={ciudad._id} ciudad={ciudad} /> })
                 }
             </div>
         </main>

@@ -7,12 +7,12 @@ import { NavLink } from 'react-router-dom';
 export default class Home extends React.Component {
 
     state = {
-        ciudad: [],
-        loader: false,
+        ciudad: null,
+        loader: true,
         error: false
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.fetchInfo()
     }
 
@@ -22,13 +22,12 @@ export default class Home extends React.Component {
         try {
             var respuesta = await fetch("http://localhost:4000/api/ciudad/" + idCiudad)
             var data = await respuesta.json()
-            if (!data.success) {
+            if (data.success) {
+                this.setState({ ciudad: data.respuesta, loader: false })
+            } else {
                 console.log(data.respuesta)
                 this.setState({ error: true })
-            } else {
-                this.setState({ ciudad: data.respuesta, loader: true })
             }
-
         } catch (error) {
             this.setState({ error: true })
         }
@@ -52,7 +51,7 @@ export default class Home extends React.Component {
             )
         }
 
-        if (!this.state.loader) {
+        if (this.state.loader) {
             return (
             <div className="preloader">
                 <div className="blob-1"></div>

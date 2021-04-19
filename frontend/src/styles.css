@@ -560,6 +560,9 @@ p{
     height: 8vh;
     width: 55vw;
   }
+  .notFound{
+    width: 50%;
+  }
 }
 
 @media (max-width:1060px){
@@ -594,4 +597,8 @@ p{
 
 .serverCaido img{
   max-width: 100%;
+}
+
+.notFound{
+  width: 50%;
 }

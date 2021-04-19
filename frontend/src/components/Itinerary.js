@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 
 const Itinerary = ({ciudad}) => {
 
+    console.log(ciudad)
+
     useEffect(()=>{
         gsap.to("#ciudadIndividual", {
             duration: 1, 
