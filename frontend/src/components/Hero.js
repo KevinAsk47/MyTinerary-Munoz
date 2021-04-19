@@ -47,11 +47,11 @@ const Hero = () => {
                         <img className="logo" src="./img/logoDos.png" alt="logo" />
                     </div>
                     <div style={{ marginTop: "2em" }}>
-                        <h2 id="frase">Find your perfect trip, <br/> designed by insiders who knows and love their cities!</h2>
+                        <h2 id="frase">Find your perfect trip, <br /> designed by insiders who knows and love their cities!</h2>
                         <h4 id="text">Click to start the adventure!</h4>
                     </div>
                 </div>
-                <NavLink to="/Cities"><button type="button" id="callToAction" className="btn callToAction btn-outline-success" onClick={window.scroll(0,0)}>Start</button></NavLink>
+                <NavLink to="/Cities"><button type="button" id="callToAction" className="btn callToAction btn-outline-success" onClick={window.scroll(0, 0)}>Start</button></NavLink>
             </div>
             <div>
                 <div className="videoEntrada">

@@ -278,7 +278,7 @@ form{
   background-color: rgba(0,0,0,0.6);
   text-align: center;
   width: 60vw;
-  height: 35vh;
+  height: 45vh;
 }
 
 .itineraryButton{
@@ -559,6 +559,12 @@ p{
   .btn{
     height: 8vh;
     width: 55vw;
+  }
+}
+
+@media (max-width:1060px){
+  .descripcion{
+    display: none;
   }
 }
 

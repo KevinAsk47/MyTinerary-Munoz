@@ -17,7 +17,7 @@ const Header = () => {
     return (
         <div>
             <div>
-            <img id="userOff" src="/img/user.svg" alt="user"/>
+                <img id="userOff" src="/img/user.svg" alt="user" />
                 <Navbar className="hola" color="#f1f1f1" light expand="md">
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>

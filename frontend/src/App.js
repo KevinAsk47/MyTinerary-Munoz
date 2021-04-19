@@ -6,7 +6,6 @@ import Itineraries from './pages/Itineraries';
 
 function App() {
   return ( 
-
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
@@ -15,7 +14,6 @@ function App() {
         <Redirect to="/"></Redirect>
       </Switch>
     </BrowserRouter >
-
   );
 }
 

@@ -16,16 +16,14 @@ const cityControllers = {
         const {pais,titulo,descripcion,imagen,bandera} = req.body 
 
         try {
-
-            const ciudadGuardada = new City({
+            const ciudadAGuardar = new City({
                 pais: pais,
                 titulo: titulo,
                 descripcion: descripcion,
                 imagen: imagen,
                 bandera: bandera
-    
             })
-            await ciudadGuardada.save()
+            await ciudadAGuardar.save()
             const ciudades = await City.find()
             res.json({success: true, respuesta: ciudades})    
 

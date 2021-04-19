@@ -5,20 +5,26 @@ import { gsap } from 'gsap';
 const Itinerary = ({ciudad}) => {
 
     useEffect(()=>{
-
-    gsap.to("#ciudadIndividual", {
-        duration: 1, 
-        scaleX: 2
+        gsap.to("#ciudadIndividual", {
+            duration: 1, 
+            scaleX: 2,
+            scaleY: 2
         
-    });
-    
-    gsap.to("#pink", {
-        duration: 1, 
-        rotationY: 360,
-        repeat: -1,  
-    });
-
+        });
+        gsap.to("#pink", {
+            duration: 1, 
+            rotationY: 360,
+            repeat: -1,  
+        })
     },[])
+
+    const scroll = () => {
+        window.scroll({
+            top: 525,
+            left: 525,
+            behavior: 'smooth'
+        });
+    }
 
     return(
         <div className="itinerary">
@@ -28,7 +34,7 @@ const Itinerary = ({ciudad}) => {
                 </div>
                 <div className="tituloBanner">
                     <h2 id="ciudadIndividual">{ciudad.titulo}</h2>
-                    <h2>{ciudad.pais}</h2>
+                    <h2 style={{padding: "8px 0 0 0"}}>{ciudad.pais}</h2>
                     <p className="descripcion" style={{padding: '0 1em 0 1em'}}>{ciudad.descripcion}</p>
                 </div>
             </div>
@@ -36,7 +42,7 @@ const Itinerary = ({ciudad}) => {
                 <img className="enConstrucion" src="/img/const.png" alt=""/>
             </div>
             <div className="itineraryButton">
-                <NavLink to="/Cities"><button className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>
+                <NavLink to="/Cities"><button onClick={scroll} className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>
             </div>
         </div>
     )

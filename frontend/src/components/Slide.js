@@ -11,7 +11,7 @@ const Slide = ({arrayItem}) => {
                     if (!ciudad.titulo) {
                         return null
                     }
-
+                    
                     return (
                     <div key={ciudad.id} className="contenedorDeFoto">
                         <div className="foto" style={{backgroundImage: `url(${ciudad.imagen})`}}>

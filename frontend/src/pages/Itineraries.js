@@ -13,21 +13,15 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-
-        this.fetchDates()
+        this.fetchInfo()
     }
 
-    fetchDates = async () => {
-
+    fetchInfo = async () => {
         var idCiudad = this.props.match.params.id
 
         try {
-            var respuesta = await fetch("http://localhost:4000/api/ciudad/" + idCiudad, {
-                method: "get"
-            })
-
+            var respuesta = await fetch("http://localhost:4000/api/ciudad/" + idCiudad)
             var data = await respuesta.json()
-
             if (!data.success) {
                 console.log(data.respuesta)
                 this.setState({ error: true })
@@ -56,15 +50,14 @@ export default class Home extends React.Component {
                     <Footer />
                 </>
             )
-
         }
 
-        if (this.state.loader === false) {
+        if (!this.state.loader) {
             return (
-                <div className="preloader">
-                    <div className="blob-1"></div>
-                    <div className="blob-2"></div>
-                </div>)
+            <div className="preloader">
+                <div className="blob-1"></div>
+                <div className="blob-2"></div>
+            </div>)
         }
 
         return (

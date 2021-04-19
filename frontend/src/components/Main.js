@@ -5,61 +5,44 @@ const Main = () => {
 
     const [city, setCity] = useState({
         data: [],
-        loading: false,
+        loading: true,
     })
-
-    const [error, setError] = useState(false)
 
     const [copiaOriginal, setCopiaOriginal] = useState([])
 
+    const [error, setError] = useState(false)
+
     useEffect(() => {
-
-        fetchDates()
-
+        fetchInfo()
     }, [])
 
-    const fetchDates = async () => {
+    const fetchInfo = async () => {
         try {
-            var respuesta = await fetch("http://localhost:4000/api/ciudades", {
-                method: "get"
-            })
-
+            var respuesta = await fetch("http://localhost:4000/api/ciudades")
             var data = await respuesta.json()
-
-            if (data.succes === false) {
-                console.log(data.repuesta)
-                
+            if (!data.success) {
+                console.log(data.repuesta)               
             } else{
                 setCity({
                     data: data.respuesta,
-                    loading: true,
+                    loading: false,
                 })
-    
                 setCopiaOriginal(data.respuesta)
             }
-
-
         } catch (error) {
-
-            setError({
-                error: true,
-            })
+            setError(true)
         }
     }
 
     const input = e => {
-
         var input = e.target.value.toLocaleLowerCase().trim()
-
-        var ciudadesFiltrados = copiaOriginal.filter((ciudad) => ciudad.titulo.toLocaleLowerCase().trim().indexOf(input) === 0)
-
+        var ciudadesFiltradas = copiaOriginal.filter((ciudad) => ciudad.titulo.toLocaleLowerCase().trim().indexOf(input) === 0)
         setCity({
-            data: ciudadesFiltrados,
+            data: ciudadesFiltradas,
         })
+    }
 
-    };
-
-    if (error.error === true) {
+    if (error) {
         return (
             <main>
                 <div style={{ backgroundImage: "url(/img/mirando.jpg)" }} className="main">
@@ -84,8 +67,7 @@ const Main = () => {
         )
     }
 
-    if (city.loading === false) {
-
+    if (city.loading) {
         return (
             <div className="preloader">
                 <div className="blob-1"></div>
@@ -107,7 +89,7 @@ const Main = () => {
             <div className="filtro">
                 <form>
                     <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
-                    <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center" }} type="search" placeholder="Search" aria-label="Search" onChange={input} />
+                    <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "5px 0 5px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={input} />
                 </form>
             </div>
             <div className="itinerarios">
