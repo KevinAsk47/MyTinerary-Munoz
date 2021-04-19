@@ -553,6 +553,13 @@ p{
   .logoFooter{
     display: none;
   }
+  .redesDiv{
+    display: none;
+  }
+  .btn{
+    height: 8vh;
+    width: 55vw;
+  }
 }
 
 #userOff{

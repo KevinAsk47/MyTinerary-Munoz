@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Ciudad from './Ciudad';
-import { gsap } from 'gsap';
 
 const Main = () => {
 
@@ -17,13 +16,6 @@ const Main = () => {
 
         fetchDates()
 
-    }, [])
-
-    useEffect(() => {
-        gsap.to(".textTip", {
-            duration: 5,
-            rotationX: 180,
-        });
     }, [])
 
     const fetchDates = async () => {

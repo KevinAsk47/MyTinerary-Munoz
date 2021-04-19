@@ -14,7 +14,7 @@ const Footer = () => {
                     <NavLink className="btn btn4" exact to="/">Sign Up</NavLink>
                 </div>
             </div>
-            <div>
+            <div className="redesDiv">
                 <h3 style={{color: 'black', borderBottom: '1px solid'}}>Redes Sociales</h3>
                 <img className="redesImg" style={{width: '10vw'}} src="/img/redes.png" alt=""/>
             </div>

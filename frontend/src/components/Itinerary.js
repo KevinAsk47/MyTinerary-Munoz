@@ -15,9 +15,7 @@ const Itinerary = ({ciudad}) => {
     gsap.to("#pink", {
         duration: 1, 
         rotationY: 360,
-        repeat: -1,
-        duration:1,
-        
+        repeat: -1,  
     });
 
     },[])
