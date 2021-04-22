@@ -1,45 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Ciudad from './Ciudad';
+import {connect} from 'react-redux'
+import ciudadesActions from '../redux/actions/ciudadesActions'
 
-const Main = () => {
-
-    const [city, setCity] = useState({
-        data: [],
-        loading: true,
-    })
-
-    const [copiaOriginal, setCopiaOriginal] = useState([])
-
-    const [error, setError] = useState(false)
+const Main = (props) => {
 
     useEffect(() => {
-        fetchInfo()
+        props.cargarCiudades()
     }, [])
 
-    const fetchInfo = async () => {
-        try {
-            var respuesta = await fetch("http://localhost:4000/api/ciudades")
-            var data = await respuesta.json()
-            if (!data.success) {
-                console.log(data.repuesta)               
-            } else{
-                setCity({data: data.respuesta, loading: false})
-                setCopiaOriginal(data.respuesta)
-            }
-        } catch (error) {
-            setError(true)
-        }
-    }
-
-    const input = e => {
-        var input = e.target.value.toLocaleLowerCase().trim()
-        var ciudadesFiltradas = copiaOriginal.filter((ciudad) => ciudad.titulo.toLocaleLowerCase().trim().indexOf(input) === 0)
-        setCity({
-            data: ciudadesFiltradas,
-        })
-    }
-
-    if (error) {
+    if (props.error) {
         return (
             <main>
                 <div style={{ backgroundImage: "url(/img/mirando.jpg)" }} className="main">
@@ -53,7 +23,7 @@ const Main = () => {
                 <div className="filtro">
                     <form>
                         <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
-                        <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center" }} type="search" placeholder="Search" aria-label="Search" onChange={input} />
+                        <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center" }} type="search" placeholder="Search" aria-label="Search" onChange={(e)=> props.search(e.target.value)} />
                     </form>
                 </div>
                 <div className="serverCaido">
@@ -64,7 +34,7 @@ const Main = () => {
         )
     }
 
-    if (city.loading) {
+    if (props.loader) {
         return (
             <div className="preloader">
                 <div className="blob-1"></div>
@@ -86,17 +56,30 @@ const Main = () => {
             <div className="filtro">
                 <form>
                     <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
-                    <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "6px 0 6px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={input} />
+                    <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "6px 0 6px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={(e)=> props.search(e.target.value)} />
                 </form>
             </div>
             <div className="itinerarios">
                 {
-                    city.data.length === 0 ? <img className="notFound" src="./img/notFound.gif" alt="" /> : city.data.map((ciudad) => { return <Ciudad key={ciudad._id} ciudad={ciudad} /> })
+                    props.listaCiudades.length === 0 ? <img className="notFound" src="./img/notFound.gif" alt="" /> : props.listaCiudades.map((ciudad) => { return <Ciudad key={ciudad._id} ciudad={ciudad} /> })
                 }
             </div>
         </main>
     )
 }
 
-export default Main
+const mapStateToProps = state => {
+    return {
+       listaCiudades: state.ciudades.ciudades,
+       loader: state.ciudades.loading,
+       error: state.ciudades.error
+    }
+}
+
+const mapDispatchToProps = {
+    cargarCiudades: ciudadesActions.fetchCiudades,
+    search: ciudadesActions.search
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Main)
 

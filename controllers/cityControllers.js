@@ -1,7 +1,6 @@
 const City = require('../models/City')
 
 const cityControllers = {
-
     todasLasCiudades: async (req, res) => {
         try {
             const ciudades = await City.find()
@@ -12,7 +11,6 @@ const cityControllers = {
     },
 
     agregarCiudad: async (req,res) => {
-
         const {pais,titulo,descripcion,imagen,bandera} = req.body 
 
         try {
@@ -26,20 +24,17 @@ const cityControllers = {
             await ciudadAGuardar.save()
             const ciudades = await City.find()
             res.json({success: true, respuesta: ciudades})    
-
         } catch(error) {
             res.json({success: false, respuesta: 'An unexpected error has occurred with our servers'})
         }
     },
 
     ciudadIndividual: async (req, res) => {
-
         const id = req.params.id 
 
         try {        
             const ciudad = await City.findById(id)
             await res.json({success: true, respuesta: ciudad}) 
-
         } catch(error) {
             res.json({success: false, respuesta: 'An unexpected error has occurred with our servers'})
         }
@@ -58,7 +53,6 @@ const cityControllers = {
     },
 
     actualizarCiudad: async (req, res) => {
-
         const id = req.params.id
 
         try {

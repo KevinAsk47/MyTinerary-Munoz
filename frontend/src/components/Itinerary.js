@@ -41,7 +41,12 @@ const Itinerary = ({ciudad}) => {
                 </div>
             </div>
             <div className="initeraryMain">
-                <img className="enConstrucion" src="/img/const.png" alt=""/>
+                <div className="itineraryPresentacion">
+                    <div className="fotoPresentacion"></div>
+                    <div className="infoPresentacion">
+                        
+                    </div>
+                </div>
             </div>
             <div className="itineraryButton">
                 <NavLink to="/Cities"><button onClick={scroll} className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>
@@ -49,5 +54,7 @@ const Itinerary = ({ciudad}) => {
         </div>
     )
 }
+
+{/* <img className="enConstrucion" src="/img/const.png" alt=""/> */}
 
 export default Itinerary

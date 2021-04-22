@@ -196,6 +196,8 @@ footer{
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    animation-name: aparicion;
+    animation-duration: 3s;
 }
 
 .cardImg{
@@ -256,6 +258,36 @@ form{
   display: flex;
   align-items: center;
   justify-content: center;
+ /*  background-color: black; */
+  height: 100vh;
+}
+
+.itineraryPresentacion{
+  width: 70%;
+  height: 45vh;
+ /*  background-color: chartreuse; */
+}
+
+.fotoPresentacion{
+  width: 10vw;
+  height: 20vh;
+ background-color: white;
+  margin-top: 12vh;
+  position: absolute;
+  margin-left: 2em;
+  border-radius: 100%;
+  border: 3px solid black;
+  z-index: 1000;
+}
+
+.infoPresentacion{
+  width: 58vw;
+  height: 40vh;
+  background-color: black;
+  margin-top: 1em;
+  margin-left: 6em;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
 
 .banner{
@@ -601,4 +633,9 @@ p{
 
 .notFound{
   width: 50%;
+}
+
+@keyframes aparicion{
+  0%{opacity: 0%;}
+  100%{opacity: 100%}
 }

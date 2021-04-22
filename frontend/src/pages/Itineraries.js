@@ -3,19 +3,24 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Itinerary from '../components/Itinerary';
 import { NavLink } from 'react-router-dom';
+import {connect} from 'react-redux'
+import ciudadesActions from '../redux/actions/ciudadesActions'
 
-export default class Home extends React.Component {
+class Itineraries extends React.Component {
 
-    state = {
+/*     state = {
         ciudad: null,
         loader: true,
         error: false
     }
+*/
 
     componentDidMount = () => {
-        this.fetchInfo()
+        var idCiudad = this.props.match.params.id
+        this.props.cargarCiudad(idCiudad)
+        console.log(this.props.listaCiudad)
     }
-
+/* 
     fetchInfo = async () => {
         var idCiudad = this.props.match.params.id
 
@@ -32,10 +37,10 @@ export default class Home extends React.Component {
             this.setState({ error: true })
         }
 
-    }
+    } */
 
     render() {
-        if (this.state.error) {
+/*         if (this.state.error) {
             return (
                 <>
                     <Header />
@@ -57,14 +62,25 @@ export default class Home extends React.Component {
                 <div className="blob-1"></div>
                 <div className="blob-2"></div>
             </div>)
-        }
-
+        } */
         return (
             <>
                 <Header />
-                <Itinerary ciudad={this.state.ciudad} />
+                <Itinerary ciudad={this.props.listaCiudad} />
                 <Footer />
             </>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+       listaCiudad: state.ciudades.ciudades
+    }
+}
+
+const mapDispatchToProps = {
+    cargarCiudad: ciudadesActions.ciudadIndividual
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Itineraries)
