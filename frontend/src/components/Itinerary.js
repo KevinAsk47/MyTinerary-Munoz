@@ -1,60 +1,28 @@
-import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { gsap } from 'gsap';
+const Itinerary = ({itinerario}) => {
 
-const Itinerary = ({ciudad}) => {
-
-    console.log(ciudad)
-
-    useEffect(()=>{
-        gsap.to("#ciudadIndividual", {
-            duration: 1, 
-            scaleX: 2,
-            scaleY: 2
-        
-        });
-        gsap.to("#pink", {
-            duration: 1, 
-            rotationY: 360,
-            repeat: -1,  
-        })
-    },[])
-
-    const scroll = () => {
-        window.scroll({
-            top: 525,
-            left: 525,
-            behavior: 'smooth'
-        });
-    }
-
-    return(
-        <div className="itinerary">
-            <div className="banner" style={{backgroundImage: `url(${ciudad.imagen})`}}>
-                <div>
-                    <img id="pink" style={{width: '50px', paddingBottom: '1em'}} src={ciudad.bandera} alt=""/>
-                </div>
-                <div className="tituloBanner">
-                    <h2 id="ciudadIndividual">{ciudad.titulo}</h2>
-                    <h2 style={{padding: "8px 0 0 0"}}>{ciudad.pais}</h2>
-                    <p className="descripcion" style={{padding: '0 1em 0 1em'}}>{ciudad.descripcion}</p>
-                </div>
-            </div>
-            <div className="initeraryMain">
-                <div className="itineraryPresentacion">
-                    <div className="fotoPresentacion"></div>
-                    <div className="infoPresentacion">
-                        
+    console.log(itinerario)
+    return (
+        <div className="initeraryMain">
+            <div className="itineraryPresentacion">
+                <div style={{ backgroundImage: `url(${itinerario.personaImagen})` }} className="fotoPresentacion"></div>
+                <div className="infoPresentacion">
+                    <h2>{itinerario.titulo}</h2>
+                    <p>{itinerario.hashtag}</p>
+                    <div>
+                        <p>{itinerario.precio}</p>
+                        <p>{itinerario.duracion}</p>
+                        <p>{itinerario.likes}</p>
                     </div>
                 </div>
-            </div>
-            <div className="itineraryButton">
-                <NavLink to="/Cities"><button onClick={scroll} className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>
             </div>
         </div>
     )
 }
 
-{/* <img className="enConstrucion" src="/img/const.png" alt=""/> */}
+/*     precio: {type: Number, required: true, min: 1, max: 5},
+    duracion: {type: Number, required: true},
+    likes: {type: Number, default: 0, min: 0}, */
+
+{/* <img className="enConstrucion" src="/img/const.png" alt=""/> */ }
 
 export default Itinerary

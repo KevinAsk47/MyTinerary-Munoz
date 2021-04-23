@@ -12,7 +12,6 @@ const cityControllers = {
 
     agregarCiudad: async (req,res) => {
         const {pais,titulo,descripcion,imagen,bandera} = req.body 
-
         try {
             const ciudadAGuardar = new City({
                 pais: pais,
@@ -31,7 +30,6 @@ const cityControllers = {
 
     ciudadIndividual: async (req, res) => {
         const id = req.params.id 
-
         try {        
             const ciudad = await City.findById(id)
             await res.json({success: true, respuesta: ciudad}) 
@@ -42,7 +40,6 @@ const cityControllers = {
 
     borrarCiudad: async (req, res) => {
         const id = req.params.id
-
         try {
             await City.findOneAndDelete({_id: id})
             const ciudades = await City.find()
@@ -54,9 +51,7 @@ const cityControllers = {
 
     actualizarCiudad: async (req, res) => {
         const id = req.params.id
-
         try {
-
             await City.findOneAndUpdate({_id: id}, {...req.body}, {new: true})
             const ciudades = await City.find()
             res.json({success: true, respuesta: ciudades})

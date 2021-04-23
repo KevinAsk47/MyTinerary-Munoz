@@ -3,44 +3,44 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Itinerary from '../components/Itinerary';
 import { NavLink } from 'react-router-dom';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { gsap } from 'gsap';
 import ciudadesActions from '../redux/actions/ciudadesActions'
 
 class Itineraries extends React.Component {
 
-/*     state = {
-        ciudad: null,
-        loader: true,
-        error: false
+    state = {
+        ciudad: [],
     }
-*/
+
+    scroll = () => {
+        window.scroll({
+            top: 525,
+            left: 525,
+            behavior: 'smooth'
+        });
+    }
 
     componentDidMount = () => {
-        var idCiudad = this.props.match.params.id
-        this.props.cargarCiudad(idCiudad)
-        console.log(this.props.listaCiudad)
+        const city = this.props.listaCiudad.find(ciudad => ciudad._id === this.props.match.params.id)
+        this.setState({ ciudad: city })   
+        this.props.cargarItinerarios(this.props.match.params.id)
+
+        gsap.to("#ciudadIndividual", {
+            duration: 1,
+            scaleX: 2,
+            scaleY: 2
+
+        });
+        gsap.to("#pink", {
+            duration: 1,
+            rotationY: 360,
+            repeat: -1,
+        })
     }
-/* 
-    fetchInfo = async () => {
-        var idCiudad = this.props.match.params.id
 
-        try {
-            var respuesta = await fetch("http://localhost:4000/api/ciudad/" + idCiudad)
-            var data = await respuesta.json()
-            if (data.success) {
-                this.setState({ ciudad: data.respuesta, loader: false })
-            } else {
-                console.log(data.respuesta)
-                this.setState({ error: true })
-            }
-        } catch (error) {
-            this.setState({ error: true })
-        }
-
-    } */
-
-    render() {
-/*         if (this.state.error) {
+    render() {   
+        if (this.props.error) {
             return (
                 <>
                     <Header />
@@ -56,17 +56,29 @@ class Itineraries extends React.Component {
             )
         }
 
-        if (this.state.loader) {
-            return (
-            <div className="preloader">
-                <div className="blob-1"></div>
-                <div className="blob-2"></div>
-            </div>)
-        } */
         return (
             <>
                 <Header />
-                <Itinerary ciudad={this.props.listaCiudad} />
+                <div className="itinerary">
+                    <div className="banner" style={{ backgroundImage: `url(${this.state.ciudad.imagen})` }}>
+                        <div>
+                            <img id="pink" style={{ width: '50px', paddingBottom: '1em' }} src={this.state.ciudad.bandera} alt="" />
+                        </div>
+                        <div className="tituloBanner">
+                            <h2 id="ciudadIndividual">{this.state.ciudad.titulo}</h2>
+                            <h2 style={{ padding: "8px 0 0 0" }}>{this.state.ciudad.pais}</h2>
+                            <p className="descripcion" style={{ padding: '0 1em 0 1em' }}>{this.state.ciudad.descripcion}</p>
+                        </div>
+                    </div>
+                        {
+                            this.props.itinerarios.map((itinerario) => {
+                                return <Itinerary key={itinerario._id} itinerario={itinerario} />
+                            })
+                        }
+                    <div className="itineraryButton">
+                        <NavLink to="/Cities"><button onClick={this.scroll} className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>
+                    </div>
+                </div>
                 <Footer />
             </>
         )
@@ -75,12 +87,14 @@ class Itineraries extends React.Component {
 
 const mapStateToProps = state => {
     return {
-       listaCiudad: state.ciudades.ciudades
+        listaCiudad: state.ciudades.ciudades,
+        error: state.ciudades.error,
+        itinerarios: state.ciudades.itinerarios
     }
 }
 
 const mapDispatchToProps = {
-    cargarCiudad: ciudadesActions.ciudadIndividual
+    cargarItinerarios: ciudadesActions.fetchItinerarios
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Itineraries)
+export default connect(mapStateToProps, mapDispatchToProps)(Itineraries)

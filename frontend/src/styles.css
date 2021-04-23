@@ -256,38 +256,57 @@ form{
 
 .initeraryMain{
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
- /*  background-color: black; */
-  height: 100vh;
+  align-items: center;
+  /* background-color: black; */
 }
 
 .itineraryPresentacion{
   width: 70%;
   height: 45vh;
- /*  background-color: chartreuse; */
+  /* background-color: chartreuse; */
 }
 
 .fotoPresentacion{
-  width: 10vw;
+  width: 9vw;
   height: 20vh;
  background-color: white;
   margin-top: 12vh;
   position: absolute;
   margin-left: 2em;
-  border-radius: 100%;
+  border-radius: 50%;
   border: 3px solid black;
   z-index: 1000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 2px 2px 2px 4px rgba(0,0,0,0.6);
 }
 
 .infoPresentacion{
-  width: 58vw;
+  width: 60vw;
   height: 40vh;
-  background-color: black;
+  background-color: white;
   margin-top: 1em;
   margin-left: 6em;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
+  box-shadow: 2px 2px 2px 4px gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoPresentacion h2{
+  background-color: rgba(0,0,0,0.6);
+}
+
+.infoPresentacion div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .banner{

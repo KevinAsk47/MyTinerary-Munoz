@@ -3,19 +3,22 @@ const initialState = {
     ciudadesCopia: [],
     loading: true,
     error: false,
+    itinerarios: []
 }
 
 const ciudadesReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'CARGAR_CIUDADES':
             return {
+                ...state,
                 ciudades: action.payload,
                 ciudadesCopia: action.payload,
-                loading: false
+                loading: false,
             }
             break
         case 'ERROR':
             return {
+                ...state,
                 error: action.payload
             }
             break
@@ -25,10 +28,10 @@ const ciudadesReducer = (state = initialState, action) => {
                 ciudades: state.ciudadesCopia.filter(ciudad => ciudad.titulo.toLocaleLowerCase().trim().indexOf(action.payload.toLocaleLowerCase().trim()) === 0)
             }
             break
-        case 'BUSCAR_CIUDAD':
+        case 'CARGAR_ITINERARIOS':
             return {
                 ...state,
-                ciudades: state.ciudades.find(ciudad => ciudad._id === action.payload)
+                itinerarios: action.payload
             }
             break
         default:
