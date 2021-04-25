@@ -31,6 +31,12 @@ const articulosActions = {
         }
     },
 
+    VaciarItinerario: () => {
+        return (dispatch, getState) => {
+            dispatch({type: 'VACIAR_ITINERARIOS'})
+        }
+    },
+
     search: (id) => {
         console.log(id)
         return (dispatch, getState) => {

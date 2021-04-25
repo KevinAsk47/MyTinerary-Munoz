@@ -5,7 +5,6 @@ import Main from '../components/Main';
 
 
 export default class Cities extends React.Component{
-
     render(){
         return(
             <>

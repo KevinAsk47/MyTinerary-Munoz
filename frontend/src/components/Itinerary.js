@@ -1,28 +1,53 @@
-const Itinerary = ({itinerario}) => {
+import { useState } from "react"
 
-    console.log(itinerario)
+const Itinerary = ({ itinerario }) => {
+
+    const [verMas, setVerMas] = useState(false)
+
+    const ver = () => {
+        setVerMas(!verMas)
+    }
+
     return (
         <div className="initeraryMain">
             <div className="itineraryPresentacion">
+                <div className="nombreGuia">
+                    <span style={{ marginTop: '10px' }}>¡Hi! I'am</span>
+                    <p>{itinerario.personaNombre}</p>
+                </div>
                 <div style={{ backgroundImage: `url(${itinerario.personaImagen})` }} className="fotoPresentacion"></div>
+                <div className="bannerPresentacion" style={{ backgroundImage: `url(${itinerario.banner})` }} ></div>
                 <div className="infoPresentacion">
-                    <h2>{itinerario.titulo}</h2>
-                    <p>{itinerario.hashtag}</p>
-                    <div>
-                        <p>{itinerario.precio}</p>
-                        <p>{itinerario.duracion}</p>
-                        <p>{itinerario.likes}</p>
+                    <div className="nombreItinerario">
+                        <h2>{itinerario.titulo}</h2>
+                        {
+                            itinerario.hashtag.map((hashtag, index) => <p key={index} className="hastashs">{hashtag}</p>)
+                        }
+                    </div>
+                    <div className="infoAdicional">
+                        <div className="billetes">
+                            {
+                                Array(itinerario.precio).fill(itinerario.precio).map((billete, index) => {
+                                    return (<img key={index} style={{ width: '50px', margin: '5px' }} src="/img/division.png" alt="" />)
+                                })
+                            }
+                        </div>
+                        <div className="reloj">
+                            <p>{itinerario.duracion}hs</p>
+                            <img style={{ width: '50px' }} src="/img/reloj.png" alt="" />
+                        </div>
+                        <div>
+                            <img style={{ width: '50px' }} src="/img/me-gusta.png" alt="" />
+                        </div>
                     </div>
                 </div>
+                <button type="button" className="leerMas" onClick={ver}>{verMas ? 'Show less' : 'Show more'}</button>
             </div>
+            {
+                verMas && <div className="masInfoItinerario"><img className="enConstrucion" src="/img/const.png" alt="" /></div>
+            }
         </div>
     )
 }
-
-/*     precio: {type: Number, required: true, min: 1, max: 5},
-    duracion: {type: Number, required: true},
-    likes: {type: Number, default: 0, min: 0}, */
-
-{/* <img className="enConstrucion" src="/img/const.png" alt=""/> */ }
 
 export default Itinerary

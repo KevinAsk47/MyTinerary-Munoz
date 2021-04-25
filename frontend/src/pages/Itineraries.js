@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Itinerary from '../components/Itinerary';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { gsap } from 'gsap';
 import ciudadesActions from '../redux/actions/ciudadesActions'
@@ -23,7 +23,7 @@ class Itineraries extends React.Component {
 
     componentDidMount = () => {
         const city = this.props.listaCiudad.find(ciudad => ciudad._id === this.props.match.params.id)
-        this.setState({ ciudad: city })   
+        this.setState({ ciudad: city })
         this.props.cargarItinerarios(this.props.match.params.id)
 
         gsap.to("#ciudadIndividual", {
@@ -39,7 +39,11 @@ class Itineraries extends React.Component {
         })
     }
 
-    render() {   
+    componentWillUnmount = () => {
+        this.props.vaciar()
+    }
+
+    render() {
         if (this.props.error) {
             return (
                 <>
@@ -56,6 +60,10 @@ class Itineraries extends React.Component {
             )
         }
 
+        if (this.props.listaCiudad.length === 0) {
+            return <Redirect to="/Cities" />
+        }
+
         return (
             <>
                 <Header />
@@ -70,11 +78,9 @@ class Itineraries extends React.Component {
                             <p className="descripcion" style={{ padding: '0 1em 0 1em' }}>{this.state.ciudad.descripcion}</p>
                         </div>
                     </div>
-                        {
-                            this.props.itinerarios.map((itinerario) => {
-                                return <Itinerary key={itinerario._id} itinerario={itinerario} />
-                            })
-                        }
+                    {
+                        this.props.itinerarios.length === 0 ? <div className="initeraryMain"><div className="noHayItinerarios"><img src="/img/alert.gif" alt=""/><h2>There are no itineraries for this city yet</h2></div></div> : this.props.itinerarios.map((itinerario) => <Itinerary key={itinerario._id} itinerario={itinerario} />)
+                    }
                     <div className="itineraryButton">
                         <NavLink to="/Cities"><button onClick={this.scroll} className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>
                     </div>
@@ -89,12 +95,14 @@ const mapStateToProps = state => {
     return {
         listaCiudad: state.ciudades.ciudades,
         error: state.ciudades.error,
-        itinerarios: state.ciudades.itinerarios
+        itinerarios: state.ciudades.itinerarios,
+        vaciarItinerarios: state.ciudades.itinerarios
     }
 }
 
 const mapDispatchToProps = {
-    cargarItinerarios: ciudadesActions.fetchItinerarios
+    cargarItinerarios: ciudadesActions.fetchItinerarios,
+    vaciar: ciudadesActions.VaciarItinerario
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itineraries)

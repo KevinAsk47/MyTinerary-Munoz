@@ -10,6 +10,8 @@ import thunk from 'redux-thunk';
 
 const miStore = createStore(mainReducer, applyMiddleware(thunk))
 
+console.log(miStore.getState())
+
 ReactDOM.render(
   <Provider store={miStore}>
     <React.StrictMode>

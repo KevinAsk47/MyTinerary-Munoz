@@ -12,8 +12,16 @@ const Ciudad = ({ciudad}) =>{
         });
     },[])
 
+    const scroll = () => {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+
     return(
-        <Link style={{textDecoration: "none"}} to={`/Itineraries/${ciudad._id}`}>
+        <Link onClick={scroll} style={{textDecoration: "none"}} to={`/Itineraries/${ciudad._id}`}>
             <div className="card">
                 <div className="cardImg" style={{backgroundImage: `url(${ciudad.imagen})`}}>
                         <img className="estrella" src="/img/estrella.svg" alt=""/>

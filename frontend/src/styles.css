@@ -259,22 +259,26 @@ form{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: black; */
 }
 
 .itineraryPresentacion{
-  width: 70%;
-  height: 45vh;
-  /* background-color: chartreuse; */
+  width: 90%;
+  height: 50vh;
+}
+
+.hastashs{
+  background-color: black;
+  display: inline-block;
+  margin: 0 5px 0 5px;
 }
 
 .fotoPresentacion{
-  width: 9vw;
+  width: 10vw;
   height: 20vh;
  background-color: white;
   margin-top: 12vh;
   position: absolute;
-  margin-left: 2em;
+  margin-left: 10em;
   border-radius: 50%;
   border: 3px solid black;
   z-index: 1000;
@@ -285,13 +289,18 @@ form{
 }
 
 .infoPresentacion{
-  width: 60vw;
-  height: 40vh;
+  position: absolute;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(217,188,69,1) 62%, rgba(232,188,59,1) 67%, rgba(241,188,53,1) 70%, rgba(253,187,45,1) 74%);
+  background-position: bottom;
+  background-size: cover;
+  width: 55vw;
+  height: 41vh;
   background-color: white;
   margin-top: 1em;
-  margin-left: 6em;
+  margin-left: 14em;
   border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
   box-shadow: 2px 2px 2px 4px gray;
   display: flex;
   flex-direction: column;
@@ -299,14 +308,106 @@ form{
   justify-content: center;
 }
 
-.infoPresentacion h2{
-  background-color: rgba(0,0,0,0.6);
+.infoPresentacion .nombreItinerario{
+  position: absolute;
+  z-index: 999;
+  margin-bottom: 7em;
+  text-align: center;
+  color: rgb(255, 255, 255);
 }
 
-.infoPresentacion div{
+.nombreItinerario h2{
+  font-size: 50px;
+  background-color: rgba(0,0,0,0.6);
+  width: 55vw;
+  border-top-left-radius: 25px;
+  color: white;
+  font-family: 'Bebas Neue', cursive;
+}
+
+.infoPresentacion .infoAdicional{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 8em;
+}
+
+.bannerPresentacion{
+  height: 20vh;
+  width: 55vw;
+  position: absolute;
+  margin-top: 1em;
+  margin-left: 14em;
+  border-top-left-radius: 52px;
+  z-index: 999;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid black;
+}
+
+.billetes{
+  width: 25vw;
+}
+
+.reloj{
+  width: 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reloj *{
+  margin: 5px;
+}
+
+.nombreGuia{
+  position: absolute;
+  height: 8vh;
+  width: 13vw;
+  background: rgb(80,104,255);
+  background: linear-gradient(0deg, rgba(80,104,255,1) 0%, rgba(176,215,255,0.87718837535014) 62%);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  margin-top: 2em;
+  margin-left: 1em;
+  z-index: 1002;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.leerMas{
+  position: absolute;
+  z-index: 1000;
+  margin-top: 17em;
+  margin-left: 33em;
+  border-radius: 50px;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  box-shadow: 2px 2px 2px 2px gray;
+  height: 2em;
+  width: 10em;
+  color: white;
+  font-weight: bold;
+}
+
+.noHayItinerarios{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4em;
+  text-align: center;
+}
+
+.noHayItinerarios img{
+  width: 50%;
 }
 
 .banner{

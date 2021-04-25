@@ -34,6 +34,12 @@ const ciudadesReducer = (state = initialState, action) => {
                 itinerarios: action.payload
             }
             break
+        case 'VACIAR_ITINERARIOS':
+            return {
+                ...state,
+                itinerarios: []
+            }
+            break
         default:
             return state
     }
