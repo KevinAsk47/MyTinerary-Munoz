@@ -727,6 +727,12 @@ p{
   }
 }
 
+@media (max-width:1350px){
+  .leerMas{
+    margin-top: 16em;
+  }
+}
+
 @media (max-width:1207px){
   .nombreGuia{
 /*     height: 20vh;
