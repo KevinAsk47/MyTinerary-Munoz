@@ -263,88 +263,77 @@ form{
 
 .itineraryPresentacion{
   width: 90%;
-  height: 50vh;
-}
-
-.hastashs{
-  background-color: black;
-  display: inline-block;
-  margin: 0 5px 0 5px;
-}
-
-.fotoPresentacion{
-  width: 10vw;
-  height: 20vh;
-  background-color: white;
-  margin-top: 12vh;
-  position: absolute;
-  margin-left: 10em;
-  border-radius: 50%;
-  border: 3px solid black;
-  z-index: 1000;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-shadow: 2px 2px 2px 4px rgba(0,0,0,0.6);
-}
-
-.infoPresentacion{
-  position: absolute;
-  background: rgb(34,193,195);
-  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(217,188,69,1) 62%, rgba(232,188,59,1) 67%, rgba(241,188,53,1) 70%, rgba(253,187,45,1) 74%);
-  background-position: bottom;
-  background-size: cover;
-  width: 55vw;
-  height: 41vh;
-  background-color: white;
-  margin-top: 1em;
-  margin-left: 14em;
-  border-top-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-  box-shadow: 2px 2px 2px 4px gray;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 2em 0 2em 0;
 }
 
-.infoPresentacion .nombreItinerario{
-  position: absolute;
-  z-index: 999;
-  margin-bottom: 7em;
-  text-align: center;
-  color: rgb(255, 255, 255);
+.fotoPresentacion{
+  min-width: 10vw;
+  min-height: 20vh;
+  left: 15em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: white;
+  border-radius: 50%;
+  border: 3px solid black;
+  box-shadow: 2px 2px 2px 4px rgba(0,0,0,0.6);
+  margin-bottom: 10px;
 }
 
-.nombreItinerario h2{
-  font-size: 50px;
-  background-color: rgba(0,0,0,0.6);
-  width: 55vw;
-  border-top-left-radius: 25px;
-  color: white;
-  font-family: 'Bebas Neue', cursive;
-}
-
-.infoPresentacion .infoAdicional{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 8em;
+.infoPresentacion{
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(217,188,69,1) 62%, rgba(232,188,59,1) 67%, rgba(241,188,53,1) 70%, rgba(253,187,45,1) 74%);
+  min-width: 55vw;
+  min-height: 50vh;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 2px 2px 2px 4px gray;
 }
 
 .bannerPresentacion{
   height: 20vh;
   width: 55vw;
-  position: absolute;
-  margin-top: 1em;
-  margin-left: 14em;
   border-top-left-radius: 52px;
-  z-index: 999;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerPresentacion h2{
+  font-family: 'Bebas Neue', cursive;
+  font-size: 50px;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  width: 55vw;
+  border-top-left-radius: 25px;
+  text-align: center;
+}
+
+.hastagItinerario{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+}
+
+.hastashs{
+  margin: 0 5px 0 5px;
+  color: #f1f1f1;
+}
+
+.infoAdicional{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 4em;
 }
 
 .billetes{
@@ -367,7 +356,6 @@ form{
 }
 
 .nombreGuia{
-  position: absolute;
   height: 8vh;
   width: 13vw;
   background: rgb(80,104,255);
@@ -375,21 +363,23 @@ form{
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
   border-bottom-left-radius: 50px;
-  margin-top: 2em;
-  margin-left: 1em;
-  z-index: 1002;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-right: 16em;
+}
+
+.botonVerMas{
+  margin-top: 2em;
+  margin-bottom: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .leerMas{
-  position: absolute;
-  z-index: 1000;
-  margin-top: 17em;
-  margin-left: 33em;
   border-radius: 50px;
   background: rgb(34,193,195);
   background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
@@ -398,6 +388,13 @@ form{
   width: 10em;
   color: white;
   font-weight: bold;
+}
+
+.masInfoItinerario{
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .noHayItinerarios{
@@ -721,22 +718,20 @@ p{
   }
 }
 
-@media (max-width:1060px){
+/* @media (max-width:1060px){
   .descripcion{
     display: none;
   }
-}
+} */
 
-@media (max-width:1350px){
+/* @media (max-width:1350px){
   .leerMas{
     margin-top: 16em;
   }
-}
+} */
 
-@media (max-width:1207px){
+/* @media (max-width:1207px){
   .nombreGuia{
-/*     height: 20vh;
-    font-size: 15px; */
     display: none;
   }
   .fotoPresentacion{
@@ -747,9 +742,9 @@ p{
   .leerMas{
     margin-top: 17em;
   }
-}
+} */
 
-@media (max-width:750px){
+/* @media (max-width:750px){
   .nombreItinerario h2{
     font-size: 30px;
     background-color: rgba(0,0,0,0.6);
@@ -811,7 +806,7 @@ p{
     text-align: center;
     color: rgb(255, 255, 255);
   }
-}
+} */
 
 #userOff{
   margin: 5px 10px 0 0;

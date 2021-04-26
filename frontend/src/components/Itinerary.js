@@ -16,10 +16,11 @@ const Itinerary = ({ itinerario }) => {
                     <p>{itinerario.personaNombre}</p>
                 </div>
                 <div style={{ backgroundImage: `url(${itinerario.personaImagen})` }} className="fotoPresentacion"></div>
-                <div className="bannerPresentacion" style={{ backgroundImage: `url(${itinerario.banner})` }} ></div>
                 <div className="infoPresentacion">
-                    <div className="nombreItinerario">
+                    <div className="bannerPresentacion" style={{ backgroundImage: `url(${itinerario.banner})` }} >
                         <h2>{itinerario.titulo}</h2>
+                    </div>
+                    <div className="hastagItinerario">
                         {
                             itinerario.hashtag.map((hashtag, index) => <p key={index} className="hastashs">{hashtag}</p>)
                         }
@@ -41,12 +42,16 @@ const Itinerary = ({ itinerario }) => {
                             <img style={{ width: '50px' }} src="/img/me-gusta.png" alt="" />
                         </div>
                     </div>
+                    <div className="comentarios">
+                        {
+                            verMas && <div className="masInfoItinerario"><img className="enConstrucion" src="/img/const.png" alt="" /></div>
+                        }
+                    </div>
+                    <div className="botonVerMas">
+                        <button type="button" className="leerMas" onClick={ver}>{verMas ? 'Show less' : 'Show more'}</button>
+                    </div>
                 </div>
-                <button type="button" className="leerMas" onClick={ver}>{verMas ? 'Show less' : 'Show more'}</button>
             </div>
-            {
-                verMas && <div className="masInfoItinerario"><img className="enConstrucion" src="/img/const.png" alt="" /></div>
-            }
         </div>
     )
 }

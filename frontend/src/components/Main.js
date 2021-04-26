@@ -11,26 +11,10 @@ const Main = (props) => {
 
     if (props.error) {
         return (
-            <main>
-                <div style={{ backgroundImage: "url(/img/mirando.jpg)" }} className="main">
-                    <div className="tituloCity">
-                        <div>
-                            <h1 className="textTip">CITIES</h1>
-                        </div>
-                    </div>
-                    <div className="globo"><div className="frontal"></div><div className="mapfront"></div><div className="mapback"></div><div className="back"></div></div>
-                </div>
-                <div className="filtro">
-                    <form>
-                        <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
-                        <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "6px 0 6px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={(e)=> props.search(e.target.value)} />
-                    </form>
-                </div>
-                <div className="serverCaido">
-                    <h3>An unexpected error has occurred with our servers</h3>
-                    <img src="/img/hosting.gif" alt=""/>
-                </div>
-            </main>
+            <div className="serverCaido">
+                <h3>An unexpected error has occurred with our servers</h3>
+                <img src="/img/hosting.gif" alt=""/>
+            </div>
         )
     }
 
@@ -61,7 +45,9 @@ const Main = (props) => {
             </div>
             <div className="itinerarios">
                 {
-                    props.listaCiudades.length === 0 ? <img className="notFound" src="./img/notFound.gif" alt="" /> : props.listaCiudades.map((ciudad) => { return <Ciudad key={ciudad._id} ciudad={ciudad} /> })
+                    props.listaCiudades.length === 0 
+                    ? <img className="notFound" src="./img/notFound.gif" alt="" /> 
+                    : props.listaCiudades.map((ciudad) => { return <Ciudad key={ciudad._id} ciudad={ciudad} /> })
                 }
             </div>
         </main>

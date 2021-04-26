@@ -81,7 +81,14 @@ class Itineraries extends React.Component {
                         </div>
                     </div>
                     {
-                        this.props.itinerarios.length === 0 ? <div className="initeraryMain"><div className="noHayItinerarios"><img src="/img/alert.gif" alt=""/><h2>There are no itineraries for this city yet</h2></div></div> : this.props.itinerarios.map((itinerario) => <Itinerary key={itinerario._id} itinerario={itinerario} />)
+                        this.props.itinerarios.length === 0
+                            ? <div className="initeraryMain">
+                                <div className="noHayItinerarios">
+                                    <img src="/img/alert.gif" alt="" />
+                                    <h2>There are no itineraries for this city yet</h2>
+                                </div>
+                            </div>
+                            : this.props.itinerarios.map((itinerario) => <Itinerary key={itinerario._id} itinerario={itinerario} />)
                     }
                     <div className="itineraryButton">
                         <NavLink to="/Cities"><button onClick={this.scroll} className="button">Go back to cities</button></NavLink><NavLink to="/"><button className="button">Home</button></NavLink>
