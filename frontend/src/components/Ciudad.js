@@ -14,8 +14,8 @@ const Ciudad = ({ciudad}) =>{
 
     const scroll = () => {
         window.scroll({
-            top: 0,
-            left: 0,
+            top: 200,
+            left: 200,
             behavior: 'smooth'
         });
     }

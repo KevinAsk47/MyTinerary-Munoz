@@ -3,7 +3,7 @@ const initialState = {
     ciudadesCopia: [],
     loading: true,
     error: false,
-    itinerarios: []
+    itinerarios: [],
 }
 
 const ciudadesReducer = (state = initialState, action) => {
@@ -31,7 +31,7 @@ const ciudadesReducer = (state = initialState, action) => {
         case 'CARGAR_ITINERARIOS':
             return {
                 ...state,
-                itinerarios: action.payload
+                itinerarios: action.payload,
             }
             break
         case 'VACIAR_ITINERARIOS':

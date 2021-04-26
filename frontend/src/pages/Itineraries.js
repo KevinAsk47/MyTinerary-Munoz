@@ -64,6 +64,8 @@ class Itineraries extends React.Component {
             return <Redirect to="/Cities" />
         }
 
+        console.log(this.props.load2)
+
         return (
             <>
                 <Header />

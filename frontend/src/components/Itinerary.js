@@ -36,7 +36,8 @@ const Itinerary = ({ itinerario }) => {
                             <p>{itinerario.duracion}hs</p>
                             <img style={{ width: '50px' }} src="/img/reloj.png" alt="" />
                         </div>
-                        <div>
+                        <div className="likes">
+                            <p>{itinerario.likes}</p>
                             <img style={{ width: '50px' }} src="/img/me-gusta.png" alt="" />
                         </div>
                     </div>

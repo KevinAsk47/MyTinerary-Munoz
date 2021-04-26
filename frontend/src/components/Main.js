@@ -23,7 +23,7 @@ const Main = (props) => {
                 <div className="filtro">
                     <form>
                         <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
-                        <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center" }} type="search" placeholder="Search" aria-label="Search" onChange={(e)=> props.search(e.target.value)} />
+                        <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "6px 0 6px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={(e)=> props.search(e.target.value)} />
                     </form>
                 </div>
                 <div className="serverCaido">
