@@ -29,10 +29,10 @@ const Header = () => {
                                 <NavLink to="/Cities">Cities</NavLink>
                             </NavItem>
                             <NavItem className="navbar">
-                                <NavLink to="">Log In</NavLink>
+                                <NavLink to="/login">Log In</NavLink>
                             </NavItem>
                             <NavItem className="navbar">
-                                <NavLink to="">Sign Up</NavLink>
+                                <NavLink to="/signup">Sign Up</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

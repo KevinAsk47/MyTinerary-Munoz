@@ -38,7 +38,7 @@ const Main = (props) => {
                 <div className="globo"><div className="frontal"></div><div className="mapfront"></div><div className="mapback"></div><div className="back"></div></div>
             </div>
             <div className="filtro">
-                <form>
+                <form className="formCity">
                     <h2 className="buscaTuCiudad">find the city you are looking for!</h2>
                     <input id="textInput" style={{ width: "50vw", borderRadius: "10px", textAlign: "center", padding: "6px 0 6px 0"}} type="search" placeholder="Search" aria-label="Search" onChange={(e)=> props.search(e.target.value)} />
                 </form>

@@ -234,7 +234,7 @@ footer{
     align-items: center;
 }
 
-form{
+.formCity{
   height: 25vh;
   width: 60vw;
   text-align: center;
@@ -480,6 +480,61 @@ p{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.formularios{
+  background-image: url(https://p4.wallpaperbetter.com/wallpaper/990/938/495/arrow-pointer-computer-form-wallpaper-preview.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formulario{
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formularioChico{
+  background: rgb(2,0,36,40);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  height: 45vh;
+  width: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formUser{
+  display: flex;
+  flex-direction: column;
+}
+
+.inp{
+  margin: 1em;
+  height: 2em;
+}
+
+.btnSubmit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit{
+  height: 10vh;
+  width: 20vw;
+}
+
+.submitChico{
+  height: 8vh;
+  width: 18vw;
 }
 
 /* Planet */
