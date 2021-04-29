@@ -483,7 +483,7 @@ p{
 }
 
 .formularios{
-  background-image: url(https://p4.wallpaperbetter.com/wallpaper/990/938/495/arrow-pointer-computer-form-wallpaper-preview.jpg);
+  background-image: url(https://images4.alphacoders.com/665/665830.jpg);
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -493,22 +493,23 @@ p{
 }
 
 .formulario{
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: rgba(34,34,34,0.75);
   height: 85vh;
+  max-width: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .formularioChico{
-  background: rgb(2,0,36,40);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: rgba(34,34,34,0.75);
   height: 45vh;
   width: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: black 10px solid;
+  border-radius: 10px;
 }
 
 .formUser{
@@ -530,11 +531,16 @@ p{
 .submit{
   height: 10vh;
   width: 20vw;
+  color: white;
+  color: black;
+  background-color: rgba(255,255,255,0.5);
 }
 
 .submitChico{
   height: 8vh;
   width: 18vw;
+  color: black;
+  background-color: rgba(255,255,255,0.5);
 }
 
 /* Planet */
@@ -864,10 +870,30 @@ p{
 } */
 
 #userOff{
-  margin: 5px 10px 0 0;
+  margin: 4px 10px 0 0;
   position: absolute;
   top: 0;
   right: 0%;
+  z-index: 1000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.bienvenida{
+  margin: 10px 3em 0 0;
+  position: absolute;
+  top: 0;
+  right: 0%;
+  z-index: 1000;
+}
+
+.bienvenida > span{
+  color: blue;
 }
 
 @media (min-width:576px){
@@ -899,3 +925,5 @@ p{
   0%{opacity: 0%;}
   100%{opacity: 100%}
 }
+
+

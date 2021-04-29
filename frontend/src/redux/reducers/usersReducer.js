@@ -1,5 +1,6 @@
 const initialState = {
-    paises: []
+    paises: [],
+    users: null
 }
 
 const ciudadesReducer = (state = initialState, action) => {
@@ -14,6 +15,19 @@ const ciudadesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+            break
+        case 'CARGAR_USUARIO':
+            localStorage.setItem('usuarioLogueado', JSON.stringify(action.payload))
+            return {
+                ...state,
+                users: action.payload
+            }
+            break
+        case 'DESLOGUEAR_USUARIO':
+            return {
+                ...state,
+                users: null
             }
             break
         default:

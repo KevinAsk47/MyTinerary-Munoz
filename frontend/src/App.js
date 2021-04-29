@@ -4,9 +4,13 @@ import Cities from './pages/Cities';
 import Itineraries from './pages/Itineraries';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import { connect } from 'react-redux'
+import userActions from './redux/actions/usersActions'
 
-
-function App() {
+function App(props) {
+  if (!props.usuario && localStorage.getItem('usuarioLogueado')) {
+    props.loginForzadoPorLS(JSON.parse(localStorage.getItem('usuarioLogueado')))
+  }
   return ( 
     <BrowserRouter>
       <Switch>
@@ -21,4 +25,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    usuario: state.users.users
+  }
+}
+
+const mapDispatchToProps = {
+  loginForzadoPorLS: userActions.loginForzadoPorLS
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

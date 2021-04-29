@@ -1,35 +1,58 @@
 import { useEffect, useState } from "react"
 import usersActions from '../redux/actions/usersActions'
 import { connect } from 'react-redux'
-import axios from 'axios'
 
 const Forms = (props) => {
 
     const [nuevoUsuario, setNuevoUsuario] = useState({
-        nombre: '', 
-        apellido: '', 
-        usuario: '', 
-        mail: '', 
-        contraseña: '', 
-        imagen: '', 
+        nombre: '',
+        apellido: '',
+        usuario: '',
+        mail: '',
+        contraseña: '',
+        imagen: '',
         pais: ''
     })
+
+    const [usuarioLogueado, setUsuarioLogueado] = useState({
+        mail: '',
+        contraseña: '', 
+    })
+
+    const [verContraseña, setVerContraseña] = useState(true)
+
+    const password = () => {
+        setVerContraseña(!verContraseña)
+    }
 
     useEffect(() => {
         props.cargarPaises()
     }, [])
 
     const leerInput = (e) => {
-        setNuevoUsuario({
-          ...nuevoUsuario,
-          [e.target.name]: e.target.value
-        })
+        let name = e.target.name
+        let value = e.target.value
+
+        if (props.form) {
+            setNuevoUsuario({
+                ...nuevoUsuario,
+                [name]: value
+            })
+        }else{
+            setUsuarioLogueado({
+                ...usuarioLogueado,
+                [name]: value
+            })
+        }
     }
-    
+
     const enviarDatos = async e => {
         e.preventDefault()
-        const respuesta = await axios.post('http://localhost:4000/api/user/signUp', nuevoUsuario)
-        console.log(respuesta)
+        if (props.form) {
+            props.nuevoUsuario(nuevoUsuario)
+        }else{
+            props.loguearUsuario(usuarioLogueado)  
+        }
     }
 
     return (
@@ -46,8 +69,22 @@ const Forms = (props) => {
                             <input className="inp" type="text" placeholder="Username" onChange={leerInput} value={nuevoUsuario.usuario} name="usuario" />
                         </>
                     }
-                    <input className="inp" type="email" placeholder="E-mail" onChange={leerInput} value={nuevoUsuario.mail} name="mail" />
-                    <input className="inp" type="password" placeholder="Password" onChange={leerInput} value={nuevoUsuario.contraseña} name="contraseña" />
+                    <div className="col-auto inp">
+                        <label className="visually-hidden" for="autoSizingInputGroup">E-mail</label>
+                        <div className="input-group">
+                            <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/user.svg" alt="" /> </div>
+                            <input type="email" className="form-control" id="autoSizingInputGroup" placeholder="E-mail"
+                            onChange={leerInput} value={props.form ? nuevoUsuario.mail : usuarioLogueado.mail } name="mail" />
+                        </div>
+                    </div>
+                    <div class="col-auto inp">
+                        <label className="visually-hidden" for="autoSizingInputGroup">Username</label>
+                        <div className="input-group">
+                            <div className="input-group-text"> <img onClick={password} style={{ width: '20px' }} src="/img/bloquear.png" alt="" /> </div>
+                            <input type={ verContraseña ? "password" : "text"} className="form-control" id="autoSizingInputGroup" placeholder="Password"
+                            onChange={leerInput} value={props.form ? nuevoUsuario.contraseña : usuarioLogueado.contraseña } name="contraseña" />
+                        </div>
+                    </div>
                     {
                         props.form &&
                         <>
@@ -64,7 +101,7 @@ const Forms = (props) => {
                         {
                             props.form ?
                             <button className="submit" type="submit" onClick={enviarDatos}>Sign Up</button>
-                            :<button className="submitChico" type="submit" onClick={enviarDatos}>Log In</button>
+                            : <button className="submitChico" type="submit" onClick={enviarDatos}>Log In</button>
                         }
                     </div>
                 </form>
@@ -81,6 +118,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     cargarPaises: usersActions.fetchPaises,
+    nuevoUsuario: usersActions.nuevoUsuario,
+    loguearUsuario: usersActions.loguearUsuario
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Forms)

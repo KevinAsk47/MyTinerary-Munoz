@@ -1,8 +1,9 @@
 const User = require('../models/User')
+const bcryptjs = require('bcryptjs')
 
 const userControllers = {
     registrarUsuario: async (req, res) => {
-        const { nombre, apellido, usuario, mail, contraseña, imagen, pais} = req.body
+        var { nombre, apellido, usuario, mail, contraseña, imagen, pais} = req.body
 
         const mailExiste = await User.findOne({ mail })
         const usuarioExiste = await User.findOne({ usuario })
@@ -10,9 +11,11 @@ const userControllers = {
         var respuesta;
         var error;
 
+        clave = bcryptjs.hashSync(contraseña, 10)
+
         if (!mailExiste && !usuarioExiste) {
             try {
-                const usuarioGrabado = new User({ nombre, apellido, usuario, mail, contraseña, imagen, pais})
+                const usuarioGrabado = new User({ nombre, apellido, usuario, mail, contraseña: clave, imagen, pais})
                 await usuarioGrabado.save()
                 respuesta = usuarioGrabado
             } catch {
@@ -32,13 +35,18 @@ const userControllers = {
     },
 
     loagearUsuario: async (req, res) => {
-        const { mail, clave } = req.body
+        const { mail, contraseña } = req.body
         var respuesta;
         var error;
 
         const usuarioExiste = await User.findOne({ mail: mail })
-        if (usuarioExiste && usuarioExiste.clave === clave) {
-            respuesta = usuarioExiste
+        if (usuarioExiste) {
+            const claveEsIgual = bcryptjs.compareSync(contraseña, usuarioExiste.contraseña)
+            if (claveEsIgual) {
+                respuesta = usuarioExiste
+            } else {
+                error = "Usuario y/o contraseña incorrectos"
+            }
         } else {
             error = "Usuario y/o contraseña incorrectos"
         }
