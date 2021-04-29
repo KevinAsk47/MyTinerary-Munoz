@@ -1,8 +1,10 @@
 require('dotenv').config()
+const passport = require('passport')
 const express = require('express')
 const cors = require('cors')
 const router = require('./routes/index')
 require('./config/dataBase')
+require('./config/passport')
 
 const app = express()
 

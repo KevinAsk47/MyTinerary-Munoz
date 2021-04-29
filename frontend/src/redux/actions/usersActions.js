@@ -16,8 +16,13 @@ const articulosActions = {
         return async (dispatch, getState) => {
             try {
                 var respuesta = await axios.post('http://localhost:4000/api/userSignUp', nuevoUsuario)
-                var data = await respuesta.json()
-                    dispatch({ type: 'CARGAR_USUARIO', payload: data })
+                if (!respuesta.data.success) {
+                    return respuesta.data.errores.details
+                }
+                dispatch({
+                    type: 'CARGAR_USUARIO',
+                    payload: respuesta.data.success ? respuesta.data.respuesta : null
+                })
             } catch (error) {
                 dispatch({ type: 'ERROR', payload: true })
             }
@@ -25,10 +30,15 @@ const articulosActions = {
     },
     loguearUsuario: (usuarioLogueado) => {
         return async (dispatch, getState) => {
-            var respuesta = await axios.post('http://localhost:4000/api/userLogIn', usuarioLogueado)
-            dispatch({
-                type: 'CARGAR_USUARIO', 
-                payload: respuesta.data.success ? respuesta.data.respuesta : null})
+            try {
+                var respuesta = await axios.post('http://localhost:4000/api/userLogIn', usuarioLogueado)
+                console.log(respuesta)
+                dispatch({
+                    type: 'CARGAR_USUARIO', 
+                    payload: respuesta.data.success ? respuesta.data.respuesta : null})
+            } catch (error) {
+                console.log(error)
+            }
         }
     },
     desloguear: () => {
@@ -39,7 +49,24 @@ const articulosActions = {
     },
     loginForzadoPorLS: (usuarioLS) => {
         return async (dispatch, getState) => {
-            dispatch({type: 'CARGAR_USUARIO', payload: usuarioLS})
+            try {
+                const respuesta = await axios.get('http://localhost:4000/api/user/loginLS', {
+                headers: {
+                    'Authorization': 'Bearer '+usuarioLS.token
+                }
+            })
+            console.log(respuesta)
+                dispatch({type: 'CARGAR_USUARIO', payload: {
+                    ...respuesta.data.respuesta,
+                    token: usuarioLS.token
+                }})
+            } catch(err) {
+                if (err.response.status === 401) {
+                    alert("Con que me intentas hackear perra")
+                }
+            }
+            
+            
         }
     }
 }

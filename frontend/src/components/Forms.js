@@ -20,6 +20,7 @@ const Forms = (props) => {
     })
 
     const [verContraseña, setVerContraseña] = useState(true)
+    const [errores, setErrores] = useState([])
 
     const password = () => {
         setVerContraseña(!verContraseña)
@@ -49,7 +50,10 @@ const Forms = (props) => {
     const enviarDatos = async e => {
         e.preventDefault()
         if (props.form) {
-            props.nuevoUsuario(nuevoUsuario)
+            var respuesta = await props.nuevoUsuario(nuevoUsuario)
+            if (respuesta) {
+                setErrores(respuesta)
+            }
         }else{
             props.loguearUsuario(usuarioLogueado)  
         }
@@ -57,6 +61,10 @@ const Forms = (props) => {
 
     return (
         <div className="formularios">
+            {
+                props.form &&
+                errores.map((error,index) => <p style={{display: 'flex', msFlexDirection: 'column'}} key={index}>{error.message}</p>)
+            }
             <div className={props.form ? 'formulario' : 'formularioChico'}>
                 <form className="formUser">
                     {
@@ -66,6 +74,7 @@ const Forms = (props) => {
                                 <input className="inp" type="text" placeholder="First Name" onChange={leerInput} value={nuevoUsuario.nombre} name="nombre" />
                                 <input className="inp" type="text" placeholder="Last Name" onChange={leerInput} value={nuevoUsuario.apellido} name="apellido" />
                             </div>
+                            {errores.path === 'nombre' && <p>{errores.message}</p>}
                             <input className="inp" type="text" placeholder="Username" onChange={leerInput} value={nuevoUsuario.usuario} name="usuario" />
                         </>
                     }

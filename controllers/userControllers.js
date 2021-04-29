@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const userControllers = {
     registrarUsuario: async (req, res) => {
@@ -10,6 +11,7 @@ const userControllers = {
 
         var respuesta;
         var error;
+        var usuarioGrabado;
 
         clave = bcryptjs.hashSync(contraseña, 10)
 
@@ -17,7 +19,8 @@ const userControllers = {
             try {
                 const usuarioGrabado = new User({ nombre, apellido, usuario, mail, contraseña: clave, imagen, pais})
                 await usuarioGrabado.save()
-                respuesta = usuarioGrabado
+                const token = jwt.sign({...usuarioGrabado}, process.env.SECRET_OR_KEY)
+                respuesta = token 
             } catch {
                 error = "Error al ingresar sus datos, reintente nuevamente"
             }
@@ -29,7 +32,7 @@ const userControllers = {
 
         res.json({
             success: !error ? true : false,
-            respuesta: respuesta,
+            respuesta: {token: respuesta, foto: usuarioGrabado.imagen, nombre: usuarioGrabado.usuario},
             error: error
         })
     },
@@ -43,7 +46,8 @@ const userControllers = {
         if (usuarioExiste) {
             const claveEsIgual = bcryptjs.compareSync(contraseña, usuarioExiste.contraseña)
             if (claveEsIgual) {
-                respuesta = usuarioExiste
+                const token = jwt.sign({...usuarioExiste}, process.env.SECRET_OR_KEY)
+                respuesta = token
             } else {
                 error = "Usuario y/o contraseña incorrectos"
             }
@@ -53,10 +57,15 @@ const userControllers = {
 
         res.json({
             success: !error ? true : false,
-            respuesta: respuesta,
+            respuesta: {token: respuesta, foto: usuarioExiste.foto, nombre: usuarioExiste.nombre},
             error: error
         })
+    },
+
+    loginForzado: (req, res) => {
+        res.json({success: true, respuesta: {foto: req.user.imagen, nombre: req.user.usuario}})
     }
 }
+
 
 module.exports = userControllers

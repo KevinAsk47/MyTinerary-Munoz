@@ -8,9 +8,15 @@ import { connect } from 'react-redux'
 import userActions from './redux/actions/usersActions'
 
 function App(props) {
-  if (!props.usuario && localStorage.getItem('usuarioLogueado')) {
-    props.loginForzadoPorLS(JSON.parse(localStorage.getItem('usuarioLogueado')))
+  if (!props.usuario && localStorage.getItem('token')) {
+    const datosUsuario = JSON.parse(localStorage.getItem('usuarioLogueado'))
+    const usuarioLS = {
+      token: localStorage.getItem('token'),
+      ...datosUsuario
+    }
+    props.loginForzadoPorLS(usuarioLS)
   }
+ 
   return ( 
     <BrowserRouter>
       <Switch>
