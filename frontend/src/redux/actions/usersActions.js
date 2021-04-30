@@ -21,8 +21,7 @@ const articulosActions = {
                 }
                 dispatch({
                     type: 'CARGAR_USUARIO',
-                    payload: respuesta.data.success ? respuesta.data.respuesta : null
-                })
+                    payload: respuesta.data.success ? respuesta.data.respuesta : null})
             } catch (error) {
                 dispatch({ type: 'ERROR', payload: true })
             }
@@ -32,12 +31,11 @@ const articulosActions = {
         return async (dispatch, getState) => {
             try {
                 var respuesta = await axios.post('http://localhost:4000/api/userLogIn', usuarioLogueado)
-                console.log(respuesta)
                 dispatch({
                     type: 'CARGAR_USUARIO', 
                     payload: respuesta.data.success ? respuesta.data.respuesta : null})
             } catch (error) {
-                console.log(error)
+                dispatch({ type: 'ERROR', payload: true })
             }
         }
     },

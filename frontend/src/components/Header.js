@@ -13,8 +13,9 @@ import {
 const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    console.log(props.usuario)
 
-    const imagenLogueado = props.usuario ? props.usuario.imagen : '/img/user.svg'
+    const imagenLogueado = props.usuario ? props.usuario.imagen :"/img/user.svg"
 
     return (
         <div>

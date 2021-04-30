@@ -16,7 +16,7 @@ const Forms = (props) => {
 
     const [usuarioLogueado, setUsuarioLogueado] = useState({
         mail: '',
-        contraseña: '', 
+        contraseña: '',
     })
 
     const [verContraseña, setVerContraseña] = useState(true)
@@ -39,7 +39,7 @@ const Forms = (props) => {
                 ...nuevoUsuario,
                 [name]: value
             })
-        }else{
+        } else {
             setUsuarioLogueado({
                 ...usuarioLogueado,
                 [name]: value
@@ -54,8 +54,8 @@ const Forms = (props) => {
             if (respuesta) {
                 setErrores(respuesta)
             }
-        }else{
-            props.loguearUsuario(usuarioLogueado)  
+        } else {
+            props.loguearUsuario(usuarioLogueado)
         }
     }
 
@@ -63,7 +63,13 @@ const Forms = (props) => {
         <div className="formularios">
             {
                 props.form &&
-                errores.map((error,index) => <p style={{display: 'flex', msFlexDirection: 'column'}} key={index}>{error.message}</p>)
+                <div className="formSignUp">
+                    <span style={{color: 'white'}}>
+                        {
+                            errores.map(error => <p>{error.message}</p>)
+                        }
+                    </span>
+                </div>
             }
             <div className={props.form ? 'formulario' : 'formularioChico'}>
                 <form className="formUser">
@@ -74,7 +80,6 @@ const Forms = (props) => {
                                 <input className="inp" type="text" placeholder="First Name" onChange={leerInput} value={nuevoUsuario.nombre} name="nombre" />
                                 <input className="inp" type="text" placeholder="Last Name" onChange={leerInput} value={nuevoUsuario.apellido} name="apellido" />
                             </div>
-                            {errores.path === 'nombre' && <p>{errores.message}</p>}
                             <input className="inp" type="text" placeholder="Username" onChange={leerInput} value={nuevoUsuario.usuario} name="usuario" />
                         </>
                     }
@@ -83,15 +88,15 @@ const Forms = (props) => {
                         <div className="input-group">
                             <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/user.svg" alt="" /> </div>
                             <input type="email" className="form-control" id="autoSizingInputGroup" placeholder="E-mail"
-                            onChange={leerInput} value={props.form ? nuevoUsuario.mail : usuarioLogueado.mail } name="mail" />
+                                onChange={leerInput} value={props.form ? nuevoUsuario.mail : usuarioLogueado.mail} name="mail" />
                         </div>
                     </div>
                     <div class="col-auto inp">
                         <label className="visually-hidden" for="autoSizingInputGroup">Username</label>
                         <div className="input-group">
                             <div className="input-group-text"> <img onClick={password} style={{ width: '20px' }} src="/img/bloquear.png" alt="" /> </div>
-                            <input type={ verContraseña ? "password" : "text"} className="form-control" id="autoSizingInputGroup" placeholder="Password"
-                            onChange={leerInput} value={props.form ? nuevoUsuario.contraseña : usuarioLogueado.contraseña } name="contraseña" />
+                            <input type={verContraseña ? "password" : "text"} className="form-control" id="autoSizingInputGroup" placeholder="Password"
+                                onChange={leerInput} value={props.form ? nuevoUsuario.contraseña : usuarioLogueado.contraseña} name="contraseña" />
                         </div>
                     </div>
                     {
@@ -109,8 +114,8 @@ const Forms = (props) => {
                     <div className="btnSubmit">
                         {
                             props.form ?
-                            <button className="submit" type="submit" onClick={enviarDatos}>Sign Up</button>
-                            : <button className="submitChico" type="submit" onClick={enviarDatos}>Log In</button>
+                                <button className="submit" type="submit" onClick={enviarDatos}>Sign Up</button>
+                                : <button className="submitChico" type="submit" onClick={enviarDatos}>Log In</button>
                         }
                     </div>
                 </form>

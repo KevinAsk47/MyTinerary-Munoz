@@ -18,7 +18,7 @@ const ciudadesReducer = (state = initialState, action) => {
             }
             break
         case 'CARGAR_USUARIO':
-            localStorage.setItem('usuarioLogueado', JSON.stringify({nombre: action.payload.nombre,
+            localStorage.setItem('usuarioLogueado', JSON.stringify({usuario: action.payload.usuario,
             imagen: action.payload.imagen}))
             localStorage.setItem('token', action.payload.token)
             return {

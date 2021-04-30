@@ -17,7 +17,7 @@ const userControllers = {
 
         if (!mailExiste && !usuarioExiste) {
             try {
-                const usuarioGrabado = new User({ nombre, apellido, usuario, mail, contraseña: clave, imagen, pais})
+                usuarioGrabado = new User({ nombre, apellido, usuario, mail, contraseña: clave, imagen, pais})
                 await usuarioGrabado.save()
                 const token = jwt.sign({...usuarioGrabado}, process.env.SECRET_OR_KEY)
                 respuesta = token 
@@ -29,10 +29,10 @@ const userControllers = {
         } else {
             error = `El e-mail ${mail} ya se encuentra en uso`
         }
-
+        
         res.json({
             success: !error ? true : false,
-            respuesta: {token: respuesta, foto: usuarioGrabado.imagen, nombre: usuarioGrabado.usuario},
+            respuesta: {token: respuesta, imagen: usuarioGrabado.imagen, usuario: usuarioGrabado.usuario},
             error: error
         })
     },
@@ -57,13 +57,13 @@ const userControllers = {
 
         res.json({
             success: !error ? true : false,
-            respuesta: {token: respuesta, foto: usuarioExiste.foto, nombre: usuarioExiste.nombre},
+            respuesta: {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario},
             error: error
         })
     },
 
     loginForzado: (req, res) => {
-        res.json({success: true, respuesta: {foto: req.user.imagen, nombre: req.user.usuario}})
+        res.json({success: true, respuesta: {imagen: req.user.imagen, usuario: req.user.usuario}})
     }
 }
 
