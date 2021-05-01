@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import { connect } from 'react-redux'
 import userActions from './redux/actions/usersActions'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App(props) {
   if (!props.usuario && localStorage.getItem('token')) {
@@ -15,6 +16,7 @@ function App(props) {
       ...datosUsuario
     }
     props.loginForzadoPorLS(usuarioLS)
+    return null
   }
  
   return ( 

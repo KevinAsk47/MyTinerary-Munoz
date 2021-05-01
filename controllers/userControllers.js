@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const userControllers = {
     registrarUsuario: async (req, res) => {
-        var { nombre, apellido, usuario, mail, contraseña, imagen, pais} = req.body
+        var { nombre, apellido, usuario, mail, contraseña, imagen, pais ,ingresoGoogle} = req.body
 
         const mailExiste = await User.findOne({ mail })
         const usuarioExiste = await User.findOne({ usuario })
@@ -17,7 +17,7 @@ const userControllers = {
 
         if (!mailExiste && !usuarioExiste) {
             try {
-                usuarioGrabado = new User({ nombre, apellido, usuario, mail, contraseña: clave, imagen, pais})
+                usuarioGrabado = new User({ nombre, apellido, usuario, mail, contraseña: clave, imagen, pais ,ingresoGoogle})
                 await usuarioGrabado.save()
                 const token = jwt.sign({...usuarioGrabado}, process.env.SECRET_OR_KEY)
                 respuesta = token 
@@ -32,13 +32,14 @@ const userControllers = {
         
         res.json({
             success: !error ? true : false,
-            respuesta: {token: respuesta, imagen: usuarioGrabado.imagen, usuario: usuarioGrabado.usuario},
+            respuesta: !error && {token: respuesta, imagen: usuarioGrabado.imagen, usuario: usuarioGrabado.usuario},
             error: error
         })
     },
 
     loagearUsuario: async (req, res) => {
         const { mail, contraseña } = req.body
+
         var respuesta;
         var error;
 
@@ -57,9 +58,10 @@ const userControllers = {
 
         res.json({
             success: !error ? true : false,
-            respuesta: {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario},
+            respuesta: !error && {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario, ingresoGoogle: usuarioExiste.ingresoGoogle },
             error: error
         })
+        console.log(error)
     },
 
     loginForzado: (req, res) => {

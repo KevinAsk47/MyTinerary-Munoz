@@ -17,7 +17,7 @@ const articulosActions = {
             try {
                 var respuesta = await axios.post('http://localhost:4000/api/userSignUp', nuevoUsuario)
                 if (!respuesta.data.success) {
-                    return respuesta.data.errores.details
+                    return respuesta.data.errores || respuesta.data.error
                 }
                 dispatch({
                     type: 'CARGAR_USUARIO',
@@ -31,6 +31,9 @@ const articulosActions = {
         return async (dispatch, getState) => {
             try {
                 var respuesta = await axios.post('http://localhost:4000/api/userLogIn', usuarioLogueado)
+                if (!respuesta.data.success) {
+                    return respuesta.data.errores.details
+                }
                 dispatch({
                     type: 'CARGAR_USUARIO', 
                     payload: respuesta.data.success ? respuesta.data.respuesta : null})

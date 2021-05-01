@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import usersActions from '../redux/actions/usersActions'
 import { connect } from 'react-redux'
+import { GoogleLogin } from 'react-google-login';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Forms = (props) => {
 
@@ -11,12 +14,13 @@ const Forms = (props) => {
         mail: '',
         contraseña: '',
         imagen: '',
-        pais: ''
+        ingresoGoogle: false
     })
 
     const [usuarioLogueado, setUsuarioLogueado] = useState({
         mail: '',
         contraseña: '',
+        ingresoGoogle: false
     })
 
     const [verContraseña, setVerContraseña] = useState(true)
@@ -47,15 +51,45 @@ const Forms = (props) => {
         }
     }
 
-    const enviarDatos = async e => {
-        e.preventDefault()
+    const enviarDatos = async (e = null, googleUser = null) => {
+        e && e.preventDefault()
+        let usuarioGrabado = e ? nuevoUsuario : googleUser
         if (props.form) {
-            var respuesta = await props.nuevoUsuario(nuevoUsuario)
+            var respuesta = await props.nuevoUsuario(usuarioGrabado)
             if (respuesta) {
-                setErrores(respuesta)
+                if (respuesta.details) {
+                    setErrores(respuesta.details)
+                } else {
+                    toast.info(respuesta, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
             }
         } else {
-            props.loguearUsuario(usuarioLogueado)
+            let usuario = e ? usuarioLogueado : googleUser
+            var respuesta = await props.loguearUsuario(usuario)
+            if (respuesta) {
+                return alert('no pibe')
+            }
+        }
+    }
+
+    const responseGoogle = (response) => {
+        if (response.profileObj.email) {
+            const { givenName, email, googleId, imageUrl, familyName } = response.profileObj
+            if (props.form) {
+                enviarDatos(null, { nombre: givenName, apellido: familyName, usuario: givenName, mail: email, contraseña: googleId, imagen: imageUrl, pais: "ninguno", ingresoGoogle: true })
+            } else {
+                enviarDatos(null, { mail: email, contraseña: googleId, ingresoGoogle: false })
+            }
+        } else {
+            alert("Algo salió mal, volvé más tarde...")
         }
     }
 
@@ -64,7 +98,7 @@ const Forms = (props) => {
             {
                 props.form &&
                 <div className="formSignUp">
-                    <span style={{color: 'white'}}>
+                    <span style={{ color: 'white' }}>
                         {
                             errores.map(error => <p>{error.message}</p>)
                         }
@@ -112,12 +146,28 @@ const Forms = (props) => {
                         </>
                     }
                     <div className="btnSubmit">
-                        {
-                            props.form ?
-                                <button className="submit" type="submit" onClick={enviarDatos}>Sign Up</button>
-                                : <button className="submitChico" type="submit" onClick={enviarDatos}>Log In</button>
-                        }
+                        <button className={props.form ? 'submit' : 'submitChico'} type="submit" onClick={enviarDatos}>{props.form ? 'Sign Up' : 'Log In'}</button>
                     </div>
+                    <p style={{ color: 'white' }}>or</p>
+                    <GoogleLogin
+                        clientId="602074754508-mbqa6smsa8d1oail4ko7pm7nqe3gbm72.apps.googleusercontent.com"
+                        buttonText="Ndeaaa"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+                    <ToastContainer />
                 </form>
             </div>
         </div>
@@ -127,6 +177,7 @@ const Forms = (props) => {
 const mapStateToProps = state => {
     return {
         listaPaises: state.users.paises,
+        usuario: state.users.users
     }
 }
 

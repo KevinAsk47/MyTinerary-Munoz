@@ -8,7 +8,8 @@ const validador = (req, res, next) => {
         mail: joi.string().required().trim().email(),
         contraseña: joi.string().min(5).trim().required().pattern(new RegExp('[a-zA-Z0-9]$')),
         imagen: joi.string().required().trim(),
-        pais: joi.string().required().trim()
+        pais: joi.string().required().trim(),
+        ingresoGoogle: joi.boolean()
     })
     const validation = schema.validate(req.body, {abortEarly: false})
     

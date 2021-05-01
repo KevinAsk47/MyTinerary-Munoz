@@ -490,26 +490,29 @@ p{
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
+  min-height: 100vh;
 }
 
 .formulario{
-  background: rgba(34,34,34,0.75);
+/*   background: rgba(34,34,34,0.75); */
   height: 85vh;
   max-width: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .formularioChico{
   background: rgba(34,34,34,0.75);
-  height: 45vh;
+  height: 55vh;
   width: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   border: black 10px solid;
   border-radius: 10px;
+  text-align: center;
 }
 
 .formUser{
@@ -529,18 +532,20 @@ p{
 }
 
 .submit{
-  height: 10vh;
-  width: 20vw;
+  height: 8vh;
+  width: 100%;
   color: white;
   color: black;
   background-color: rgba(255,255,255,0.5);
+  border-radius: 5px;
 }
 
 .submitChico{
   height: 8vh;
-  width: 18vw;
+  width: 100%;
   color: black;
   background-color: rgba(255,255,255,0.5);
+  border-radius: 5px;
 }
 
 .formSignUp{

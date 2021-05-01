@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     mail: {type: String, required: true},
     contraseña: {type: String, required: true},
     imagen: {type: String, required: true},
-    pais: {type: String, required: true}
+    pais: {type: String, required: true},
+    ingresoGoogle: {type: Boolean}
 })
 const User = mongoose.model('user', userSchema)
 
