@@ -61,7 +61,6 @@ const userControllers = {
             respuesta: !error && {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario, ingresoGoogle: usuarioExiste.ingresoGoogle },
             error: error
         })
-        console.log(error)
     },
 
     loginForzado: (req, res) => {

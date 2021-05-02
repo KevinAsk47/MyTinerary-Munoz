@@ -489,23 +489,26 @@ p{
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-wrap: wrap;
   min-height: 100vh;
+  flex-wrap: wrap;
 }
 
 .formulario{
-/*   background: rgba(34,34,34,0.75); */
-  height: 85vh;
-  max-width: 75vh;
+  margin: 3em 0 3em 0;
+  background: rgba(34,34,34,0.75);
+  height: 100vh;
+  width: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  border: black 10px solid;
+  border-radius: 10px;
 }
 
 .formularioChico{
   background: rgba(34,34,34,0.75);
-  height: 55vh;
+  height: 65vh;
   width: 60vh;
   display: flex;
   align-items: center;
@@ -515,14 +518,22 @@ p{
   text-align: center;
 }
 
+.SignUpForFree{
+  margin-top: 1em;
+  color: white;
+}
+
 .formUser{
   display: flex;
   flex-direction: column;
 }
 
 .inp{
-  margin: 1em;
-  height: 2em;
+  margin: 1em 0 1em 0;
+}
+
+.form-select{
+  margin: 1em 0 1em 0;
 }
 
 .btnSubmit{
@@ -554,8 +565,10 @@ p{
   width: 70vw;
   max-width: 75vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 /* Planet */

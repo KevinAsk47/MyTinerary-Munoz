@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
-import usersActions from '../redux/actions/usersActions'
-import { connect } from 'react-redux'
+import { useEffect, useState } from "react";
+import usersActions from '../redux/actions/usersActions';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,6 +26,30 @@ const Forms = (props) => {
 
     const [verContraseña, setVerContraseña] = useState(true)
     const [errores, setErrores] = useState([])
+
+    const tostada = (respuesta) => {
+        toast.error(respuesta, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+
+    const tostadaExitosa = () => {
+        toast.success('🦄 Wow so easy!', {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
 
     const password = () => {
         setVerContraseña(!verContraseña)
@@ -53,30 +78,34 @@ const Forms = (props) => {
 
     const enviarDatos = async (e = null, googleUser = null) => {
         e && e.preventDefault()
-        let usuarioGrabado = e ? nuevoUsuario : googleUser
         if (props.form) {
-            var respuesta = await props.nuevoUsuario(usuarioGrabado)
-            if (respuesta) {
-                if (respuesta.details) {
-                    setErrores(respuesta.details)
+            let usuarioGrabado = e ? nuevoUsuario : googleUser
+            if (!googleUser && (nuevoUsuario.nombre === "" || nuevoUsuario.apellido === "" || nuevoUsuario.usuario === "" || nuevoUsuario.mail === "" || nuevoUsuario.contraseña === "" || nuevoUsuario.imagen === "")) {
+                return tostada('completa todos los campos por favor')
+            } else {
+                var respuesta = await props.nuevoUsuario(usuarioGrabado)
+                if (respuesta) {
+                    if (respuesta.details) {
+                        setErrores(respuesta.details)
+                    } else {
+                        tostada(respuesta)
+                    }
                 } else {
-                    toast.info(respuesta, {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    tostadaExitosa()
                 }
             }
         } else {
             let usuario = e ? usuarioLogueado : googleUser
+            if (!googleUser && ((usuarioLogueado.contraseña || usuarioLogueado.mail) === "")) {
+                tostada('completa todos los campos por favor')
+            }else{
             var respuesta = await props.loguearUsuario(usuario)
             if (respuesta) {
-                return alert('no pibe')
+                tostada(respuesta)
+            } else {
+                tostadaExitosa() 
             }
+        }   
         }
     }
 
@@ -95,49 +124,67 @@ const Forms = (props) => {
 
     return (
         <div className="formularios">
-            {
-                props.form &&
-                <div className="formSignUp">
-                    <span style={{ color: 'white' }}>
-                        {
-                            errores.map(error => <p>{error.message}</p>)
-                        }
-                    </span>
-                </div>
-            }
             <div className={props.form ? 'formulario' : 'formularioChico'}>
-                <form className="formUser">
+                <form className="formUser" >
                     {
                         props.form &&
                         <>
-                            <div>
-                                <input className="inp" type="text" placeholder="First Name" onChange={leerInput} value={nuevoUsuario.nombre} name="nombre" />
-                                <input className="inp" type="text" placeholder="Last Name" onChange={leerInput} value={nuevoUsuario.apellido} name="apellido" />
+                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                <div className="col-6 inp">
+                                    <label className="visually-hidden">First Name</label>
+                                    <div className="input-group">
+                                        <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/letra-f.png" alt="" /> </div>
+                                        <input type="text" className="form-control" placeholder="First Name"
+                                            onChange={leerInput} value={nuevoUsuario.nombre} name="nombre" required />
+                                    </div>
+                                </div>
+                                <div className="col-6 inp">
+                                    <label className="visually-hidden">Last Name</label>
+                                    <div className="input-group">
+                                        <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/l.png" alt="" /> </div>
+                                        <input type="text" className="form-control" placeholder="Last Name"
+                                            onChange={leerInput} value={nuevoUsuario.apellido} name="apellido" required />
+                                    </div>
+                                </div>
                             </div>
-                            <input className="inp" type="text" placeholder="Username" onChange={leerInput} value={nuevoUsuario.usuario} name="usuario" />
+                            <div className="col-auto inp">
+                                <label className="visually-hidden">Username</label>
+                                <div className="input-group">
+                                    <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/user.svg" alt="" /> </div>
+                                    <input type="text" className="form-control" placeholder="Username"
+                                        onChange={leerInput} value={nuevoUsuario.usuario} name="usuario" required />
+                                </div>
+                            </div>
                         </>
                     }
                     <div className="col-auto inp">
-                        <label className="visually-hidden" for="autoSizingInputGroup">E-mail</label>
+                        <label className="visually-hidden">E-mail</label>
                         <div className="input-group">
-                            <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/user.svg" alt="" /> </div>
-                            <input type="email" className="form-control" id="autoSizingInputGroup" placeholder="E-mail"
-                                onChange={leerInput} value={props.form ? nuevoUsuario.mail : usuarioLogueado.mail} name="mail" />
+                            <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/arroba.png" alt="" /> </div>
+                            <input type="email" className="form-control" placeholder="E-mail"
+                                onChange={leerInput} value={props.form ? nuevoUsuario.mail : usuarioLogueado.mail} name="mail" required />
                         </div>
                     </div>
-                    <div class="col-auto inp">
-                        <label className="visually-hidden" for="autoSizingInputGroup">Username</label>
+                    <div className="col-auto inp">
+                        <label className="visually-hidden">Password</label>
                         <div className="input-group">
                             <div className="input-group-text"> <img onClick={password} style={{ width: '20px' }} src="/img/bloquear.png" alt="" /> </div>
-                            <input type={verContraseña ? "password" : "text"} className="form-control" id="autoSizingInputGroup" placeholder="Password"
-                                onChange={leerInput} value={props.form ? nuevoUsuario.contraseña : usuarioLogueado.contraseña} name="contraseña" />
+                            <input type={verContraseña ? "password" : "text"} className="form-control" placeholder="Password"
+                                onChange={leerInput} value={props.form ? nuevoUsuario.contraseña : usuarioLogueado.contraseña} name="contraseña" required />
                         </div>
                     </div>
                     {
                         props.form &&
                         <>
-                            <input className="inp" type="url" placeholder="Image" onChange={leerInput} value={nuevoUsuario.imagen} name="imagen" />
-                            <select className="inp" name="pais" onChange={leerInput} value={nuevoUsuario.pais} >
+                            <div className="col-auto inp">
+                                <label className="visually-hidden">Username</label>
+                                <div className="input-group">
+                                    <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/paises.png" alt="" /> </div>
+                                    <input type="text" className="form-control" placeholder="URL"
+                                        onChange={leerInput} value={nuevoUsuario.imagen} name="imagen" required />
+                                </div>
+                            </div>
+                            <select className="form-select col-12" aria-label="Default select example" name="pais" onChange={leerInput} value={nuevoUsuario.pais} >
                                 <option>Open this select menu</option>
                                 {
                                     props.listaPaises.map((pais) => <option key={pais.name} value={pais.name} >{pais.name}</option>)
@@ -148,7 +195,7 @@ const Forms = (props) => {
                     <div className="btnSubmit">
                         <button className={props.form ? 'submit' : 'submitChico'} type="submit" onClick={enviarDatos}>{props.form ? 'Sign Up' : 'Log In'}</button>
                     </div>
-                    <p style={{ color: 'white' }}>or</p>
+                    <p style={{ color: 'white' }}>---- or ----</p>
                     <GoogleLogin
                         clientId="602074754508-mbqa6smsa8d1oail4ko7pm7nqe3gbm72.apps.googleusercontent.com"
                         buttonText="Ndeaaa"
@@ -156,12 +203,18 @@ const Forms = (props) => {
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
+                    {
+                        !props.form &&
+                        <div className="SignUpForFree">
+                        <p>Don't have a MyTynerary account yet?</p>
+                        <p>Sign up for free <Link to="/SignUp">here!</Link></p>
+                        </div>
+                    }
                     <ToastContainer
                         position="top-right"
                         autoClose={5000}
                         hideProgressBar={false}
                         newestOnTop={false}
-                        closeOnClick
                         rtl={false}
                         pauseOnFocusLoss
                         draggable
@@ -170,6 +223,20 @@ const Forms = (props) => {
                     <ToastContainer />
                 </form>
             </div>
+            {
+                props.form &&
+                <div className="formSignUp">
+                    <img style={{width: '15vw'}} src="/img/logoDos.png" alt=""/>
+                    <h2>Sign up for free!</h2>
+                    <p>Are you already registered?</p>
+                    <p>Click <Link to="/LogIn">Here</Link> </p>
+                    <span style={{ color: 'red', textAlign: 'center' }}>
+                        {
+                            errores.map(error => <p>*{error.message}</p>)
+                        }
+                    </span>
+                </div>
+            }
         </div>
     )
 }

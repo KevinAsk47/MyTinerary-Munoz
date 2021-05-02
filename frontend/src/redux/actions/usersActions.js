@@ -32,7 +32,7 @@ const articulosActions = {
             try {
                 var respuesta = await axios.post('http://localhost:4000/api/userLogIn', usuarioLogueado)
                 if (!respuesta.data.success) {
-                    return respuesta.data.errores.details
+                    return respuesta.data.error
                 }
                 dispatch({
                     type: 'CARGAR_USUARIO', 
@@ -65,9 +65,7 @@ const articulosActions = {
                 if (err.response.status === 401) {
                     alert("Con que me intentas hackear perra")
                 }
-            }
-            
-            
+            } 
         }
     }
 }
