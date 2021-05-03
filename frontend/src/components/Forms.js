@@ -8,6 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Forms = (props) => {
 
+    const [verContraseña, setVerContraseña] = useState(true)
+    const [errores, setErrores] = useState([])
+    const password = () => {
+        setVerContraseña(!verContraseña)
+    }
+
     const [nuevoUsuario, setNuevoUsuario] = useState({
         nombre: '',
         apellido: '',
@@ -23,9 +29,6 @@ const Forms = (props) => {
         contraseña: '',
         ingresoGoogle: false
     })
-
-    const [verContraseña, setVerContraseña] = useState(true)
-    const [errores, setErrores] = useState([])
 
     const tostada = (respuesta) => {
         toast.error(respuesta, {
@@ -52,10 +55,6 @@ const Forms = (props) => {
                 props.history.push('/Cities')
             }
         })
-    }
-
-    const password = () => {
-        setVerContraseña(!verContraseña)
     }
 
     useEffect(() => {
@@ -88,7 +87,7 @@ const Forms = (props) => {
             } else {
                 var respuesta = await props.nuevoUsuario(usuarioGrabado)
                 if (respuesta) {
-                    respuesta.details ? setErrores(respuesta.details) : tostada(respuesta) 
+                    respuesta.details ? setErrores(respuesta.details) : tostada(respuesta)
                 } else {
                     redireccion("Thanks for signing up!")
                 }
@@ -97,10 +96,10 @@ const Forms = (props) => {
             let usuario = e ? usuarioLogueado : googleUser
             if (usuario.contraseña === "" || usuario.mail === "") {
                 tostada('Complete all fields please')
-            }else{
+            } else {
                 var respuesta = await props.loguearUsuario(usuario)
                 respuesta ? tostada(respuesta) : redireccion("Successful login!")
-            }   
+            }
         }
     }
 
@@ -122,116 +121,103 @@ const Forms = (props) => {
             <div className={props.form ? 'formulario' : 'formularioChico'}>
                 <form className="formUser" >
                     {
-                        props.form &&
-                        <>
-                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                <div className="col-6 inp">
-                                    <label className="visually-hidden">First Name</label>
-                                    <div className="input-group">
-                                        <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/letra-f.png" alt="" /> </div>
-                                        <input type="text" className="form-control" placeholder="First Name"
-                                            onChange={leerInput} value={nuevoUsuario.nombre} name="nombre" required />
-                                    </div>
-                                </div>
-                                <div className="col-6 inp">
-                                    <label className="visually-hidden">Last Name</label>
-                                    <div className="input-group">
-                                        <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/l.png" alt="" /> </div>
-                                        <input type="text" className="form-control" placeholder="Last Name"
-                                            onChange={leerInput} value={nuevoUsuario.apellido} name="apellido" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-auto inp">
-                                <label className="visually-hidden">Username</label>
+                        props.form ? props.signup.map((campo, index) => {
+                            let imagenIlustrativa = campo === 'nombre' ? "/img/letra-f.png"
+                                : campo === 'apellido' ? "/img/l.png"
+                                : campo === 'usuario' ? "/img/user.svg"
+                                : campo === 'mail' ? "/img/arroba.png"
+                                : campo === 'contraseña' ? "/img/bloquear.png"
+                                : "/img/paises.png"
+                            let tipo = campo === 'nombre' ? "text"
+                                : campo === 'apellido' ? "text"
+                                : campo === 'usuario' ? "text"
+                                : campo === 'mail' ? "email"
+                                : campo === 'contraseña' ? (verContraseña ? "password" : "text")
+                                : "text"
+                            let nombreDeCampo = campo === 'nombre' ? "First Name"
+                                : campo === 'apellido' ? "Last Name"
+                                : campo === 'usuario' ? "Usuario"
+                                : campo === 'mail' ? "Email"
+                                : campo === 'contraseña' ? 'Password'
+                                : "URL"
+                            return (<div key={index} className="col-auto inp">
+                                <label className="visually-hidden">{campo}</label>
                                 <div className="input-group">
-                                    <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/user.svg" alt="" /> </div>
-                                    <input type="text" className="form-control" placeholder="Username"
-                                        onChange={leerInput} value={nuevoUsuario.usuario} name="usuario" required />
+                                    <div className="input-group-text"> <img onClick={password} style={{ width: '20px' }}
+                                        src={imagenIlustrativa} alt="" /> </div>
+                                    <input type={tipo} className="form-control" placeholder={nombreDeCampo}
+                                        onChange={leerInput}
+                                        value={campo === 'nombre' ? nuevoUsuario.nombre
+                                            : campo === 'apellido' ? nuevoUsuario.apellido
+                                            : campo === 'usuario' ? nuevoUsuario.usuario
+                                            : campo === 'mail' ? nuevoUsuario.mail
+                                            : campo === 'contraseña' ? nuevoUsuario.contraseña
+                                            : nuevoUsuario.imagen} name={campo}
+                                    />
                                 </div>
-                            </div>
-                        </>
+                            </div>)
+                        })
+                            :
+                            props.login.map((campo,index) => {
+                                let imagenIlustrativa = campo === 'mail' ? "/img/arroba.png" : "/img/bloquear.png"
+                                let tipo = campo === 'mail' ? "email" : (verContraseña ? "password" : "text")
+                                let nombreDeCampo = campo === 'mail' ? "Email" : 'Password'
+                                return (<div key={index} className="col-auto inp">
+                                    <label className="visually-hidden">{campo}</label>
+                                    <div className="input-group">
+                                        <div className="input-group-text"> <img style={{ width: '20px' }} src={imagenIlustrativa} alt="" /> </div>
+                                        <input type={tipo} className="form-control" placeholder={nombreDeCampo}
+                                            onChange={leerInput}
+                                            value={campo === 'mail' ? usuarioLogueado.mail : usuarioLogueado.contraseña} name={campo}
+                                        />
+                                    </div>
+                                </div>)
+                            })
                     }
-                    <div className="col-auto inp">
-                        <label className="visually-hidden">E-mail</label>
-                        <div className="input-group">
-                            <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/arroba.png" alt="" /> </div>
-                            <input type="email" className="form-control" placeholder="E-mail"
-                                onChange={leerInput} value={props.form ? nuevoUsuario.mail : usuarioLogueado.mail} name="mail" required />
-                        </div>
-                    </div>
-                    <div className="col-auto inp">
-                        <label className="visually-hidden">Password</label>
-                        <div className="input-group">
-                            <div className="input-group-text"> <img onClick={password} style={{ width: '20px' }} src="/img/bloquear.png" alt="" /> </div>
-                            <input type={verContraseña ? "password" : "text"} className="form-control" placeholder="Password"
-                                onChange={leerInput} value={props.form ? nuevoUsuario.contraseña : usuarioLogueado.contraseña} name="contraseña" required />
-                        </div>
-                    </div>
                     {
-                        props.form &&
-                        <>
-                            <div className="col-auto inp">
-                                <label className="visually-hidden">Username</label>
-                                <div className="input-group">
-                                    <div className="input-group-text"> <img style={{ width: '20px' }} src="/img/paises.png" alt="" /> </div>
-                                    <input type="text" className="form-control" placeholder="URL"
-                                        onChange={leerInput} value={nuevoUsuario.imagen} name="imagen" required />
-                                </div>
-                            </div>
-                            <select className="form-select col-12" aria-label="Default select example" name="pais" onChange={leerInput} value={nuevoUsuario.pais} >
-                                <option>Open this select menu</option>
-                                {
-                                    props.listaPaises.map((pais) => <option key={pais.name} value={pais.name} >{pais.name}</option>)
-                                }
-                            </select>
-                        </>
+                        props.form && <select className="form-select col-12" aria-label="Default select example" name="pais" onChange={leerInput} value={nuevoUsuario.pais} >
+                            <option>Open this select menu</option>
+                            {
+                                props.listaPaises.map((pais) => <option key={pais.name} value={pais.name} >{pais.name}</option>)
+                            }
+                        </select>
                     }
                     <div className="btnSubmit">
                         <button className={props.form ? 'submit' : 'submitChico'} type="submit" onClick={enviarDatos}>{props.form ? 'Sign Up' : 'Log In'}</button>
                     </div>
                     <p style={{ color: 'white' }}>---- or ----</p>
                     <GoogleLogin
+                        style={{ textAlign: 'center' }}
                         clientId="602074754508-mbqa6smsa8d1oail4ko7pm7nqe3gbm72.apps.googleusercontent.com"
-                        buttonText="Ndeaaa"
+                        buttonText={props.form ? "Sign up with google" : "Log in with google"}
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
                     {
-                        !props.form &&
-                        <div className="SignUpForFree">
-                        <p>Don't have a MyTynerary account yet?</p>
-                        <p>Sign up for free <Link to="/SignUp">here!</Link></p>
-                        </div>
+                        props.form ? <span className="errores">
+                            {
+                                errores.map(error => <p>*{error.message}</p>)
+                            }
+                        </span>
+                            : <div className="SignUpForFree">
+                                <p>Don't have a MyTynerary account yet?</p>
+                                <p>Sign up for free <Link to="/SignUp">here!</Link></p>
+                            </div>
                     }
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    />
-                    <ToastContainer />
                 </form>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </div>
-            {
-                props.form &&
-                <div className="formSignUp">
-                    <img style={{width: '15vw'}} src="/img/logoDos.png" alt=""/>
-                    <h2>Sign up for free!</h2>
-                    <p>Are you already registered?</p>
-                    <p>Click <Link to="/LogIn">Here</Link> </p>
-                    <span style={{ color: 'red', textAlign: 'center' }}>
-                        {
-                            errores.map(error => <p>*{error.message}</p>)
-                        }
-                    </span>
-                </div>
-            }
+            {props.children}
         </div>
     )
 }

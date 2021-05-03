@@ -27,7 +27,7 @@ const validador = (req, res, next) => {
             'string.pattern.base': 'Your password must contain a letter and a number'
         }),
         imagen: joi.string().required().trim().uri().messages({
-            'string.uri': 'este URL no es valido',
+            'string.uri': 'This URL is not valid',
             'string.empty': 'You should use a valid URL',
         }),
         pais: joi.string().required().trim().messages({
