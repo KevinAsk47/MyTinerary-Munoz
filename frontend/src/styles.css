@@ -272,7 +272,7 @@ footer{
 
 .fotoPresentacion{
   min-width: 10vw;
-  min-height: 20vh;
+  height: 20vh;
   left: 15em;
   background-position: center;
   background-repeat: no-repeat;
@@ -357,7 +357,7 @@ footer{
 
 .nombreGuia{
   height: 8vh;
-  width: 13vw;
+  width: 15%;
   background: rgb(80,104,255);
   background: linear-gradient(0deg, rgba(80,104,255,1) 0%, rgba(176,215,255,0.87718837535014) 62%);
   border-top-left-radius: 50px;
@@ -770,7 +770,6 @@ p{
 /* media */
 
 @media (max-width:576px){
-
   .tituloCity{
     width: 100%;
   }
@@ -805,97 +804,48 @@ p{
   .notFound{
     width: 50%;
   }
+  .infoPresentacion{
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(217,188,69,1) 62%, rgba(232,188,59,1) 67%, rgba(241,188,53,1) 70%, rgba(253,187,45,1) 74%);
+    width: 100%;
+    min-height: 60vh;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: 2px 2px 2px 4px gray;
+  }
+  .bannerPresentacion{
+    width: 100%;
+  }
+  .bannerPresentacion h2{
+    font-size: 35px;
+  }
+  .fotoPresentacion{
+    min-width: 50vw;
+  }
+  .nombreGuia{
+    height: 8%;
+    width: 50%;
+  }
+  .formulario{
+    height: 100vh;
+    width: 95%;
+  }
+  .formularioChico{
+    height: 65vh;
+    width: 80%;
+  }
+  .billetes{
+    height: 55px;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
-/* @media (max-width:1060px){
+@media (max-width:1060px){
   .descripcion{
     display: none;
   }
-} */
-
-/* @media (max-width:1350px){
-  .leerMas{
-    margin-top: 16em;
-  }
-} */
-
-/* @media (max-width:1207px){
-  .nombreGuia{
-    display: none;
-  }
-  .fotoPresentacion{
-    width: 12vw;
-    height: 19vh;
-    margin-top: 1em;
-  }
-  .leerMas{
-    margin-top: 17em;
-  }
-} */
-
-/* @media (max-width:750px){
-  .nombreItinerario h2{
-    font-size: 30px;
-    background-color: rgba(0,0,0,0.6);
-    width: 55vw;
-    border-top-left-radius: 25px;
-    color: white;
-    font-family: 'Bebas Neue', cursive;
-    z-index: 10000;
-  }
-  .leerMas{
-    position: absolute;
-    z-index: 1000;
-    margin-top: 41em;
-    margin-left: 7em;
-    border-radius: 50px;
-    background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
-    box-shadow: 2px 2px 2px 2px gray;
-    height: 2em;
-    width: 10em;
-    color: white;
-    font-weight: bold;
-  }
-  .fotoPresentacion{
-    width: 50vw;
-    height: 21vh;
-    background-color: white;
-    margin-top: 4vh;
-    position: absolute;
-    margin-left: 6em;
-    border-radius: 50%;
-    border: 3px solid black;
-    z-index: 1000;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: 2px 2px 2px 4px rgba(0,0,0,0.6);
-  }
-  .nombreGuia{
-    display: none;
-  }
-  .itineraryPresentacion{
-    height: 100vh;
-    width: 100%;
-  }
-  .bannerPresentacion{
-    display: none;
-  }
-  .infoPresentacion{
-    margin-top: 8em;
-    margin-left: 20px;
-    height: 80vh;
-    width: 90vw;
-  }
-  .infoPresentacion .nombreItinerario{
-    position: absolute;
-    z-index: 5000;
-    margin-bottom: 18em;
-    text-align: center;
-    color: rgb(255, 255, 255);
-  }
-} */
+}
 
 #userOff{
   margin: 4px 10px 0 0;

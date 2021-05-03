@@ -22,12 +22,12 @@ const userControllers = {
                 const token = jwt.sign({...usuarioGrabado}, process.env.SECRET_OR_KEY)
                 respuesta = token 
             } catch {
-                error = "Error al ingresar sus datos, reintente nuevamente"
+                error = "Error entering your details, please try again"
             }
         } else if (!mailExiste && usuarioExiste) {
-            error = `El usuario ${usuario} ya se encuentra en uso`
+            error = `The user ${ususario} is already in use.`
         } else {
-            error = `El e-mail ${mail} ya se encuentra en uso`
+            error = `Email ${mail} is already in use`
         }
         
         res.json({
@@ -50,10 +50,10 @@ const userControllers = {
                 const token = jwt.sign({...usuarioExiste}, process.env.SECRET_OR_KEY)
                 respuesta = token
             } else {
-                error = "Usuario y/o contraseña incorrectos"
+                error = "Incorrect username and / or password"
             }
         } else {
-            error = "Usuario y/o contraseña incorrectos"
+            error = "Incorrect username and / or password"
         }
 
         res.json({

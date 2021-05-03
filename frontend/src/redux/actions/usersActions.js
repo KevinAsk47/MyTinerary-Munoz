@@ -56,7 +56,6 @@ const articulosActions = {
                     'Authorization': 'Bearer '+usuarioLS.token
                 }
             })
-            console.log(respuesta)
                 dispatch({type: 'CARGAR_USUARIO', payload: {
                     ...respuesta.data.respuesta,
                     token: usuarioLS.token

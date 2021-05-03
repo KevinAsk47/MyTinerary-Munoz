@@ -9,7 +9,7 @@ export default class SignUp extends React.Component{
         return(
             <>
                 <Header />
-                <Forms form={true} />
+                <Forms form={true} history={this.props.history} />
                 <Footer />
             </>  
         )

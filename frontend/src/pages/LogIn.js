@@ -8,7 +8,7 @@ export default class LogIn extends React.Component{
         return(
             <>
                 <Header />
-                <Forms form={false} />
+                <Forms form={false} history={this.props.history} />
                 <Footer />
             </>  
         )

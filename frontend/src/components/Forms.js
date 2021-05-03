@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import usersActions from '../redux/actions/usersActions';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,16 +39,19 @@ const Forms = (props) => {
         })
     }
 
-    const tostadaExitosa = () => {
-        toast.success('🦄 Wow so easy!', {
+    const redireccion = (mensaje) => {
+        toast.success(mensaje, {
             position: "bottom-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-        });
+            onClose: () => {
+                props.history.push('/Cities')
+            }
+        })
     }
 
     const password = () => {
@@ -80,32 +83,24 @@ const Forms = (props) => {
         e && e.preventDefault()
         if (props.form) {
             let usuarioGrabado = e ? nuevoUsuario : googleUser
-            if (!googleUser && (nuevoUsuario.nombre === "" || nuevoUsuario.apellido === "" || nuevoUsuario.usuario === "" || nuevoUsuario.mail === "" || nuevoUsuario.contraseña === "" || nuevoUsuario.imagen === "")) {
-                return tostada('completa todos los campos por favor')
+            if (usuarioGrabado.nombre === "" || usuarioGrabado.apellido === "" || usuarioGrabado.usuario === "" || usuarioGrabado.mail === "" || usuarioGrabado.contraseña === "" || usuarioGrabado.imagen === "") {
+                return tostada('Complete all fields please')
             } else {
                 var respuesta = await props.nuevoUsuario(usuarioGrabado)
                 if (respuesta) {
-                    if (respuesta.details) {
-                        setErrores(respuesta.details)
-                    } else {
-                        tostada(respuesta)
-                    }
+                    respuesta.details ? setErrores(respuesta.details) : tostada(respuesta) 
                 } else {
-                    tostadaExitosa()
+                    redireccion("Thanks for signing up!")
                 }
             }
         } else {
             let usuario = e ? usuarioLogueado : googleUser
-            if (!googleUser && ((usuarioLogueado.contraseña || usuarioLogueado.mail) === "")) {
-                tostada('completa todos los campos por favor')
+            if (usuario.contraseña === "" || usuario.mail === "") {
+                tostada('Complete all fields please')
             }else{
-            var respuesta = await props.loguearUsuario(usuario)
-            if (respuesta) {
-                tostada(respuesta)
-            } else {
-                tostadaExitosa() 
-            }
-        }   
+                var respuesta = await props.loguearUsuario(usuario)
+                respuesta ? tostada(respuesta) : redireccion("Successful login!")
+            }   
         }
     }
 
@@ -118,7 +113,7 @@ const Forms = (props) => {
                 enviarDatos(null, { mail: email, contraseña: googleId, ingresoGoogle: false })
             }
         } else {
-            alert("Algo salió mal, volvé más tarde...")
+            alert("Oops, something went wrong")
         }
     }
 
@@ -251,7 +246,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     cargarPaises: usersActions.fetchPaises,
     nuevoUsuario: usersActions.nuevoUsuario,
-    loguearUsuario: usersActions.loguearUsuario
+    loguearUsuario: usersActions.loguearUsuario,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Forms)
