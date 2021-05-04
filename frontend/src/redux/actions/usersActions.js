@@ -66,6 +66,16 @@ const articulosActions = {
                 }
             } 
         }
+    },
+    exitoso: (respuesta) => {
+        return (dispatch, getState) => {
+            dispatch({type: 'EXITOSO', payload: true})
+        }
+    },
+    desmontarTostada: (respuesta) => {
+        return (dispatch, getState) => {
+            dispatch({type: 'EXITOSO', payload: false})
+        }
     }
 }
 

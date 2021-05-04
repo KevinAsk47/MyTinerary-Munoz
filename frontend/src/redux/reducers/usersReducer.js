@@ -1,7 +1,8 @@
 const initialState = {
     paises: [],
     users: null,
-    tostada: null
+    tostada: null,
+    exito: false
 }
 
 const ciudadesReducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ const ciudadesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: null
+            }
+            break
+        case 'EXITOSO':
+            return {
+                exito: action.payload
             }
             break
         default:

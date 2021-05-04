@@ -30,31 +30,15 @@ const Forms = (props) => {
         ingresoGoogle: false
     })
 
-    const tostada = (respuesta) => {
-        toast.error(respuesta, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        })
-    }
-
-    const redireccion = (mensaje) => {
-        toast.success(mensaje, {
-            position: "bottom-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            onClose: () => {
-                props.history.push('/Cities')
-            }
-        })
+    const tostada = (respuesta,condition) => {
+        if (condition === "error") {
+            toast.error(respuesta, {
+                position: "top-right",
+            })
+        }else{
+            props.exitoso() 
+            props.history.push('/')
+        }   
     }
 
     useEffect(() => {
@@ -82,23 +66,24 @@ const Forms = (props) => {
         e && e.preventDefault()
         if (props.form) {
             let usuarioGrabado = e ? nuevoUsuario : googleUser
-            if (usuarioGrabado.nombre === "" || usuarioGrabado.apellido === "" || usuarioGrabado.usuario === "" || usuarioGrabado.mail === "" || usuarioGrabado.contraseña === "" || usuarioGrabado.imagen === "") {
-                return tostada('Complete all fields please')
+            if (Object.values(usuarioGrabado).some(valor => valor === "")) {
+                return tostada('Complete all fields please',"error")
             } else {
                 var respuesta = await props.nuevoUsuario(usuarioGrabado)
                 if (respuesta) {
-                    respuesta.details ? setErrores(respuesta.details) : tostada(respuesta)
+                    respuesta.details ? setErrores(respuesta.details) : tostada(respuesta,"error")
                 } else {
-                    redireccion("Thanks for signing up!")
+                    tostada()
                 }
             }
         } else {
             let usuario = e ? usuarioLogueado : googleUser
+            console.log(usuario)
             if (usuario.contraseña === "" || usuario.mail === "") {
-                tostada('Complete all fields please')
+                tostada("Complete all fields please","error")
             } else {
                 var respuesta = await props.loguearUsuario(usuario)
-                respuesta ? tostada(respuesta) : redireccion("Successful login!")
+                respuesta ? tostada(respuesta,"error") : tostada()
             }
         }
     }
@@ -107,39 +92,33 @@ const Forms = (props) => {
         if (response.profileObj.email) {
             const { givenName, email, googleId, imageUrl, familyName } = response.profileObj
             if (props.form) {
-                enviarDatos(null, { nombre: givenName, apellido: familyName, usuario: givenName, mail: email, contraseña: googleId, imagen: imageUrl, pais: "ninguno", ingresoGoogle: true })
+                enviarDatos(null, { nombre: givenName, apellido: familyName, usuario: "us"+1, mail: email, contraseña: googleId, imagen: imageUrl, pais: "ninguno", ingresoGoogle: true })
             } else {
-                enviarDatos(null, { mail: email, contraseña: googleId, ingresoGoogle: false })
+                enviarDatos(null, { mail: email, contraseña: googleId, ingresoGoogle: true })
             }
         } else {
             alert("Oops, something went wrong")
         }
     }
 
+    const info = {
+        nombre: {imagen: '/img/letra-f.png', nombre: 'First Name', tipo: 'text'},
+        apellido: {imagen: '/img/l.png', nombre: 'Last Name', tipo: 'text'},
+        usuario: {imagen: '/img/user.svg', nombre: 'Usuario', tipo: 'text'},
+        mail: {imagen: '/img/arroba.png', nombre: 'Email', tipo: 'email'},
+        contraseña: {imagen: '/img/bloquear.png', nombre: 'Password', tipo: (verContraseña ? "password" : "text")},
+        imagen: {imagen: '/img/paises.png', nombre: 'URL', tipo: 'text'}
+    }
+
     return (
         <div className="formularios">
             <div className={props.form ? 'formulario' : 'formularioChico'}>
-                <form className="formUser" >
+                <form className="formUser">
                     {
                         props.form ? props.signup.map((campo, index) => {
-                            let imagenIlustrativa = campo === 'nombre' ? "/img/letra-f.png"
-                                : campo === 'apellido' ? "/img/l.png"
-                                : campo === 'usuario' ? "/img/user.svg"
-                                : campo === 'mail' ? "/img/arroba.png"
-                                : campo === 'contraseña' ? "/img/bloquear.png"
-                                : "/img/paises.png"
-                            let tipo = campo === 'nombre' ? "text"
-                                : campo === 'apellido' ? "text"
-                                : campo === 'usuario' ? "text"
-                                : campo === 'mail' ? "email"
-                                : campo === 'contraseña' ? (verContraseña ? "password" : "text")
-                                : "text"
-                            let nombreDeCampo = campo === 'nombre' ? "First Name"
-                                : campo === 'apellido' ? "Last Name"
-                                : campo === 'usuario' ? "Usuario"
-                                : campo === 'mail' ? "Email"
-                                : campo === 'contraseña' ? 'Password'
-                                : "URL"
+                            let imagenIlustrativa = info[campo].imagen
+                            let tipo = info[campo].tipo
+                            let nombreDeCampo = info[campo].nombre
                             return (<div key={index} className="col-auto inp">
                                 <label className="visually-hidden">{campo}</label>
                                 <div className="input-group">
@@ -147,12 +126,7 @@ const Forms = (props) => {
                                         src={imagenIlustrativa} alt="" /> </div>
                                     <input type={tipo} className="form-control" placeholder={nombreDeCampo}
                                         onChange={leerInput}
-                                        value={campo === 'nombre' ? nuevoUsuario.nombre
-                                            : campo === 'apellido' ? nuevoUsuario.apellido
-                                            : campo === 'usuario' ? nuevoUsuario.usuario
-                                            : campo === 'mail' ? nuevoUsuario.mail
-                                            : campo === 'contraseña' ? nuevoUsuario.contraseña
-                                            : nuevoUsuario.imagen} name={campo}
+                                        value={nuevoUsuario[campo]} name={campo}
                                     />
                                 </div>
                             </div>)
@@ -165,7 +139,7 @@ const Forms = (props) => {
                                 return (<div key={index} className="col-auto inp">
                                     <label className="visually-hidden">{campo}</label>
                                     <div className="input-group">
-                                        <div className="input-group-text"> <img style={{ width: '20px' }} src={imagenIlustrativa} alt="" /> </div>
+                                        <div className="input-group-text"> <img onClick={password} style={{ width: '20px' }} src={imagenIlustrativa} alt="" /> </div>
                                         <input type={tipo} className="form-control" placeholder={nombreDeCampo}
                                             onChange={leerInput}
                                             value={campo === 'mail' ? usuarioLogueado.mail : usuarioLogueado.contraseña} name={campo}
@@ -233,6 +207,7 @@ const mapDispatchToProps = {
     cargarPaises: usersActions.fetchPaises,
     nuevoUsuario: usersActions.nuevoUsuario,
     loguearUsuario: usersActions.loguearUsuario,
+    exitoso: usersActions.exitoso
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Forms)

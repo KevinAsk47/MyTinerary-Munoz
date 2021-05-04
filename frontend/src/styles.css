@@ -391,10 +391,11 @@ footer{
 }
 
 .masInfoItinerario{
-  height: 60vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: black;
 }
 
 .noHayItinerarios{
@@ -575,6 +576,18 @@ p{
   color: red;
   text-align: center;
   margin-top: 20px;
+}
+
+.activities{
+  height: 100%;
+  width: 75%;
+  background-color: rgba(253,187,45,1);
+}
+
+.comentarios{
+  height: 100%;
+  width: 100%;
+  background-color: rgb(47, 74, 226);
 }
 
 /* Planet */

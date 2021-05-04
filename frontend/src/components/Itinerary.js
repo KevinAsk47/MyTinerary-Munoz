@@ -44,7 +44,14 @@ const Itinerary = ({ itinerario }) => {
                     </div>
                     <div className="comentarios">
                         {
-                            verMas && <div className="masInfoItinerario"><img className="enConstrucion" src="/img/const.png" alt="" /></div>
+                            verMas && <div className="masInfoItinerario">
+                                <div className="activities">
+
+                                </div>
+                                <div className="comentarios">
+
+                                </div>
+                            </div>
                         }
                     </div>
                     <div className="botonVerMas">

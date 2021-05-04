@@ -24,10 +24,8 @@ const userControllers = {
             } catch {
                 error = "Error entering your details, please try again"
             }
-        } else if (!mailExiste && usuarioExiste) {
-            error = `The user ${ususario} is already in use.`
         } else {
-            error = `Email ${mail} is already in use`
+            (!mailExiste && usuarioExiste) ? error = `The user ${usuario} is already in use.` : error = `Email ${mail} is already in use`
         }
         
         res.json({
@@ -58,7 +56,7 @@ const userControllers = {
 
         res.json({
             success: !error ? true : false,
-            respuesta: !error && {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario, ingresoGoogle: usuarioExiste.ingresoGoogle },
+            respuesta: !error && {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario, ingresoGoogle: usuarioExiste.ingresoGoogle},
             error: error
         })
     },
