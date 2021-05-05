@@ -582,12 +582,69 @@ p{
   height: 100%;
   width: 75%;
   background-color: rgba(253,187,45,1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.activity{
+  height: 30%;
+  width: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: black 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 20px 20px 0 20px;
+}
+
+.activity:hover{
+  transform: scale(1.1);
+}
+
+.activity > p{
+  background-color: rgba(0,0,0,0.6);
+  text-align: center;
+  width: 100%;
 }
 
 .comentarios{
   height: 100%;
   width: 100%;
   background-color: rgb(47, 74, 226);
+}
+
+.enviarComentario{
+  background-color: coral;
+  width: 30vw;
+}
+
+.enviarComentario > input{
+  width: 25vw;
+}
+
+.enviarComentario > button{
+  width: 5vw;
+}
+
+.cajaComentario{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+}
+
+.cajaDeComentarios{
+  height: 70vh;
+  width: 30vw;
+  background-color: black;
 }
 
 /* Planet */

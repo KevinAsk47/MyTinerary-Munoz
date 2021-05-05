@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Forms = (props) => {
-
+    const [paises, setPaises] = useState([])
     const [verContraseña, setVerContraseña] = useState(true)
     const [errores, setErrores] = useState([])
     const password = () => {
@@ -42,8 +42,18 @@ const Forms = (props) => {
     }
 
     useEffect(() => {
-        props.cargarPaises()
-    }, [])
+        fetchPaises()
+    },[])
+
+    const fetchPaises = async () => {
+        try {
+            var respuesta = await fetch("https://restcountries.eu/rest/v2/all")
+            var data = await respuesta.json()
+            setPaises(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const leerInput = (e) => {
         let name = e.target.name
@@ -78,7 +88,6 @@ const Forms = (props) => {
             }
         } else {
             let usuario = e ? usuarioLogueado : googleUser
-            console.log(usuario)
             if (usuario.contraseña === "" || usuario.mail === "") {
                 tostada("Complete all fields please","error")
             } else {
@@ -152,7 +161,7 @@ const Forms = (props) => {
                         props.form && <select className="form-select col-12" aria-label="Default select example" name="pais" onChange={leerInput} value={nuevoUsuario.pais} >
                             <option>Open this select menu</option>
                             {
-                                props.listaPaises.map((pais) => <option key={pais.name} value={pais.name} >{pais.name}</option>)
+                                paises.map((pais) => <option key={pais.name} value={pais.name} >{pais.name}</option>)
                             }
                         </select>
                     }
@@ -198,13 +207,11 @@ const Forms = (props) => {
 
 const mapStateToProps = state => {
     return {
-        listaPaises: state.users.paises,
         usuario: state.users.users
     }
 }
 
 const mapDispatchToProps = {
-    cargarPaises: usersActions.fetchPaises,
     nuevoUsuario: usersActions.nuevoUsuario,
     loguearUsuario: usersActions.loguearUsuario,
     exitoso: usersActions.exitoso

@@ -1,5 +1,4 @@
 const initialState = {
-    paises: [],
     users: null,
     tostada: null,
     exito: false
@@ -7,12 +6,6 @@ const initialState = {
 
 const ciudadesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'CARGAR_PAISES':
-            return {
-                ...state,
-                paises: action.payload,
-            }
-            break
         case 'ERROR':
             return {
                 ...state,

@@ -4,7 +4,7 @@ import usersReducer from './usersReducer';
 
 const mainReducer = combineReducers({
     ciudades: ciudadesReducer,
-    users: usersReducer
+    users: usersReducer,
 })
 
 export default mainReducer
