@@ -12,7 +12,7 @@ const { todasLasCiudades, agregarCiudad, ciudadIndividual, borrarCiudad, actuali
 const { agregarItinerario, todosLosItinerarios, borrarItinerario, actualizarItinerario, itinerarioIndividual, itinerariosPorCiudad } = itineraryControllers
 const { registrarUsuario, loagearUsuario, loginForzado } = userControllers
 const { cargarActividad, actividadesPorItinerario } = activityControllers
-const { cargarComentario } = commentControllers
+const { cargarComentario, borrarComentario } = commentControllers
 
 router.route('/ciudades')
 .get(todasLasCiudades)
@@ -50,7 +50,8 @@ router.route('/actividades')
 router.route('/actividades/itinerario/:id')
 .get(actividadesPorItinerario)
 
-router.route('/comentario')
-.post(cargarComentario)
+router.route('/comentario/:id')
+.post(passport.authenticate('jwt', {session: false}), cargarComentario)
+.delete(borrarComentario)
 
 module.exports = router

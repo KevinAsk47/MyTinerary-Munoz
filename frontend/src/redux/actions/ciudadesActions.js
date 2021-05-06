@@ -43,22 +43,7 @@ const articulosActions = {
         return (dispatch, getState) => {
             dispatch({ type: 'FILTRAR_CIUDAD', payload: value })
         }
-    },
-
-/*     fetchComentarios: () => {
-        return async (dispatch, getState) => {
-            try {
-                var respuesta = await axios.put('http://localhost:4000/api/userSignUp', nuevoUsuario)
-                if (!data.success) {
-                    console.log(data.repuesta)
-                } else {
-                    dispatch({ type: 'CARGAR_CIUDADES', payload: data.respuesta })
-                }
-            } catch (error) {
-                dispatch({ type: 'ERROR', payload: true })
-            }
-        }
-    }, */
+    }
 }
 
 export default articulosActions

@@ -40,6 +40,12 @@ const ciudadesReducer = (state = initialState, action) => {
                 itinerarios: []
             }
             break
+        case 'CARGAR_COMENTARIOS':
+            return {
+                 ...state,
+                itinerarios: action.payload
+                }
+            break
         default:
             return state
     }

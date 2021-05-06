@@ -2,26 +2,17 @@ const Itinerary = require('../models/Itinerary')
 
 const commentControllers = {
     cargarComentario: async (req,res) => {
-        const { idUser , comentario } = req.body 
+        const { comentario } = req.body 
+        const idUser = req.user._id
+        const id = req.params.id
 
         var respuesta;
         var error;
 
         try {
-            const comentarioAGuardar = await Itinerary.push({
-                comentarios: [{idUser,comentario}],
-            })
-            console.log(comentarioAGuardar)
-/*             comentarioAGuardar.comentarios.push();
-            await comentarioAGuardar.save(); */
-
-/*             const update = { $push: { comentarios: [{idUser: idUser, comentario: comentario}] } }
-            const itinerarioAGuardar = new Itinerary(update)
-            await itinerarioAGuardar.save() */
-/*             console.log(comentarioAGuardar)
-            *//* await comentarioAGuardar.save();
-            const comentarios = await Itinerary.find()  */
-            respuesta = comentarioAGuardar
+            const comentarioParaAgregar = await Itinerary.findOneAndUpdate({ _id: id }, { $push: { comentarios: {comentario: comentario, idUser: idUser}}},{new:true}).populate('comentarios.idUser')
+            comentarioParaAgregar.save()
+            respuesta = comentarioParaAgregar
         } catch(error) {
             error = 'An unexpected error has occurred with our servers'
         }
@@ -32,6 +23,36 @@ const commentControllers = {
             error: error
         })
     },
+
+    borrarComentario: async (req, res) => {
+        const id = req.params.id
+        const { idComentario } = req.body
+
+        console.log(id)
+        console.log(idComentario)
+
+        var respuesta;
+        var error;
+
+        try {
+/*             const borrarComentario = await Itinerary.findOneAndRemove({ _id: id },{ $pop: { comentarios: {_id: idComentario}}})
+            console.log(borrarComentario)  */
+/*             borrarComentario.save() */
+/*             const itinerarios = await Itinerary.find()
+            respuesta = itinerarios */
+        } catch(error) {
+            error = 'An unexpected error has occurred with our servers'
+        }   
+    
+ 
+       /*  console.log(respuesta)  */
+
+/*         res.json({
+            success: !error ? true : false,
+            respuesta: !error && respuesta,
+            error: error
+        }) */
+    }
 }
 
 

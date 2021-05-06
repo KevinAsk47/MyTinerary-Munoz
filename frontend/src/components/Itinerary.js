@@ -51,7 +51,7 @@ const Itinerary = (props) => {
                                     <Activities idItinerario={props.itinerario._id} />
                                 </div>
                                 <div className="comentarios">
-                                    <Comments comentarios={props.itinerario.comentarios} />
+                                    <Comments comentarios={props.itinerario.comentarios} idItinerario={props.itinerario._id} />
                                 </div>
                             </div>
                         }

@@ -644,7 +644,21 @@ p{
 .cajaDeComentarios{
   height: 70vh;
   width: 30vw;
-  background-color: black;
+  background-color: blue;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.comentario{
+  background-color: coral;
+  height: 5vh;
+  width: 90%;
+  margin: 5px 0 5px 0;
+  display: flex;
+  justify-content: space-around;
 }
 
 /* Planet */

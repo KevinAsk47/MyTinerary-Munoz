@@ -23,7 +23,7 @@ const Activities = (props) => {
             {
                 actividades.map((actividad) => {
                     return (
-                        <div className="activity" style={{ backgroundImage: `url(${actividad.imagen})` }}>
+                        <div key={actividad._id} className="activity" style={{ backgroundImage: `url(${actividad.imagen})` }}>
                             <p>{actividad.titulo}</p>
                         </div>
                     )

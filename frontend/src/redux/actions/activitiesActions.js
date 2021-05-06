@@ -12,7 +12,7 @@ const articulosActions = {
                 console.log(error)
             }
         }
-    }
+    },
 }
 
 export default articulosActions
