@@ -1,35 +1,48 @@
 import { useEffect, useState } from "react"
 import { connect } from 'react-redux';
 import commentsActions from '../redux/actions/commentsActions';
+import Comment from "./Comment";
 
 const Comments = (props) => {
 
     const [comentario, setComentario] = useState({ comentario: "", token: localStorage.getItem('token') })
-    const [agregarComentario, setAgregarComentario] = useState(props.comentarios)
+    const [comentarioActualizado, setComentarioActualizado] = useState({ token: localStorage.getItem('token') })
+    const [agregarComentario, setAgregarComentario] = useState([])
+
+    useEffect(() => {
+        setAgregarComentario(props.comentarios)
+    },[])
 
     const leerInput = (e) => {
         let name = e.target.name
         let value = e.target.value
-
         setComentario({
             ...comentario,
             [name]: value
         })
-
     }
 
     const comentar = async (e) => {
         e.preventDefault()
-        var respuesta = await props.fetchComentarios(comentario , props.idItinerario)
+        var respuesta = await props.fetchComentarios(comentario, props.idItinerario)
         setAgregarComentario(respuesta)
     }
 
-    const borrarComentario = async (e) =>{
-        let id = e.target.id
-        var respuesta = await props.borrarComentario(id , props.idItinerario)
-        console.log(respuesta) 
+    const borrarComentario = async (id) => {
+        var respuesta = await props.borrarComentario(id, props.idItinerario)
+        setAgregarComentario(respuesta)
     }
 
+    const enviarComentarioActualizado = async ( e, id, comentarioAModificar ) => {
+        setComentarioActualizado({...comentarioActualizado,...comentarioAModificar})
+        if (e.key === "Enter") {
+            var respuesta = await props.actualizarComentario(comentarioActualizado, props.idItinerario, id)
+            setAgregarComentario(respuesta)
+        }
+    }
+
+    console.log(agregarComentario)
+    console.log(props.comentarios)
 
     return (
         <>
@@ -37,22 +50,22 @@ const Comments = (props) => {
                 <div className="cajaDeComentarios">
                     {
                         props.usuario ? agregarComentario.map((comentario) => {
-                            return (
-                                <div key={comentario._id} className="comentario">
-                                   {/*  <p>{comentario.idUser.nombre}</p> */}
-                                    <p style={{color: 'red'}}>{comentario.comentario}</p>
-                                    <button id={comentario._id} onClick={borrarComentario}>x</button>
-                                </div>
-                            )
+                            return <Comment
+                            key={comentario._id} 
+                            borrarComentario={borrarComentario} 
+                            enviarComentarioActualizado={enviarComentarioActualizado}
+                            comentario={comentario}
+                            agregarComentario={agregarComentario}
+                            />
                         }) :
-                        props.comentarios.map((comentario) => {
-                            return (
-                                <div key={comentario._id} className="comentario">
-                                   {/*  <p>{comentario.idUser.nombre}</p> */}
-                                    <p style={{color: 'red'}}>{comentario.comentario}</p>
-                                </div>
-                            )
-                        })
+                            props.comentarios.map((comentario) => {
+                                return (
+                                    <div key={comentario._id} className="comentario">
+                                        <p>{comentario.idUser.nombre}</p> 
+                                        <p style={{ color: 'red' }}>{comentario.comentario}</p>
+                                    </div>
+                                )
+                            })
                     }
                 </div>
                 <form className="enviarComentario">
@@ -72,7 +85,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     fetchComentarios: commentsActions.fetchComentarios,
-    borrarComentario: commentsActions.borrarComentario
+    borrarComentario: commentsActions.borrarComentario,
+    actualizarComentario: commentsActions.actualizarComentario
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments)

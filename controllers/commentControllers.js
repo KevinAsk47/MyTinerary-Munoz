@@ -28,30 +28,46 @@ const commentControllers = {
         const id = req.params.id
         const { idComentario } = req.body
 
-        console.log(id)
-        console.log(idComentario)
+        var respuesta;
+        var error;
+
+        try {
+            const borrarComentario = await Itinerary.findOneAndUpdate({ _id: id },{ $pull: { comentarios: {_id: idComentario}}},{new:true})
+            borrarComentario.save()
+            respuesta = borrarComentario
+        } catch(error) {
+            error = 'An unexpected error has occurred with our servers'
+        }   
+    
+        res.json({
+            success: !error ? true : false,
+            respuesta: !error && respuesta,
+            error: error
+        })
+    },
+
+    modificarComentario: async (req, res) => {
+        const id = req.params.id
+        const { comentario } = req.body.info
+        const { idComentario } = req.body
+        const idUser = req.user._id
 
         var respuesta;
         var error;
 
         try {
-/*             const borrarComentario = await Itinerary.findOneAndRemove({ _id: id },{ $pop: { comentarios: {_id: idComentario}}})
-            console.log(borrarComentario)  */
-/*             borrarComentario.save() */
-/*             const itinerarios = await Itinerary.find()
-            respuesta = itinerarios */
+            const modificarComentario = await Itinerary.findOneAndUpdate({ _id: id, "comentarios._id": idComentario }, { $set: { "comentarios.$.comentario": comentario } },{new:true})
+            modificarComentario.save()
+            respuesta = modificarComentario
         } catch(error) {
             error = 'An unexpected error has occurred with our servers'
         }   
     
- 
-       /*  console.log(respuesta)  */
-
-/*         res.json({
+        res.json({
             success: !error ? true : false,
             respuesta: !error && respuesta,
             error: error
-        }) */
+        }) 
     }
 }
 

@@ -24,8 +24,20 @@ const articulosActions = {
                 data: { idComentario: id } 
             })
             if (respuesta.data.success) {
-                console.log(respuesta.data)
-               /*  return respuesta.data.respuesta.comentarios */
+                return respuesta.data.respuesta.comentarios
+            }
+        }
+    },
+
+    actualizarComentario: (info , idItinerario , id) => {
+        return async (dispatch, getState) => {
+            var respuesta = await axios.put('http://localhost:4000/api/comentario/' + idItinerario,{info: info, idComentario: id}, {
+                headers: {
+                    'Authorization': 'Bearer '+ info.token
+                }
+            })
+            if (respuesta.data.success) {
+                return respuesta.data.respuesta.comentarios
             }
         }
     }
