@@ -30,7 +30,7 @@ const userControllers = {
         
         res.json({
             success: !error ? true : false,
-            respuesta: !error && {token: respuesta, imagen: usuarioGrabado.imagen, usuario: usuarioGrabado.usuario},
+            respuesta: !error && {token: respuesta, imagen: usuarioGrabado.imagen, usuario: usuarioGrabado.usuario, mail: usuarioGrabado.mail},
             error: error
         })
     },
@@ -56,13 +56,13 @@ const userControllers = {
 
         res.json({
             success: !error ? true : false,
-            respuesta: !error && {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario, ingresoGoogle: usuarioExiste.ingresoGoogle},
+            respuesta: !error && {token: respuesta, imagen: usuarioExiste.imagen, usuario: usuarioExiste.usuario, ingresoGoogle: usuarioExiste.ingresoGoogle, mail: usuarioExiste.mail},
             error: error
         })
     },
 
     loginForzado: (req, res) => {
-        res.json({success: true, respuesta: {imagen: req.user.imagen, usuario: req.user.usuario}})
+        res.json({success: true, respuesta: {imagen: req.user.imagen, usuario: req.user.usuario, mail: req.user.mail}})
     }
 }
 

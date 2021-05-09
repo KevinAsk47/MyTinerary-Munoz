@@ -10,7 +10,7 @@ const commentControllers = {
         var error;
 
         try {
-            const comentarioParaAgregar = await Itinerary.findOneAndUpdate({ _id: id }, { $push: { comentarios: {comentario: comentario, idUser: idUser}}},{new:true}).populate('comentarios.idUser')
+            const comentarioParaAgregar = await Itinerary.findOneAndUpdate({ _id: id }, { $push: { comentarios: {comentario: comentario, idUser: idUser}}},{new:true}).populate({ path: "comentarios", populate: { path: "idUser", select: { "usuario":1, "nombre": 1, "apellido": 1, "mail": 1 } } })
             comentarioParaAgregar.save()
             respuesta = comentarioParaAgregar
         } catch(error) {
@@ -32,7 +32,7 @@ const commentControllers = {
         var error;
 
         try {
-            const borrarComentario = await Itinerary.findOneAndUpdate({ _id: id },{ $pull: { comentarios: {_id: idComentario}}},{new:true})
+            const borrarComentario = await Itinerary.findOneAndUpdate({ _id: id },{ $pull: { comentarios: {_id: idComentario}}},{new:true}).populate({ path: "comentarios", populate: { path: "idUser", select: { "usuario":1, "nombre": 1, "apellido": 1, "mail": 1 } } })
             borrarComentario.save()
             respuesta = borrarComentario
         } catch(error) {
@@ -56,7 +56,7 @@ const commentControllers = {
         var error;
 
         try {
-            const modificarComentario = await Itinerary.findOneAndUpdate({ _id: id, "comentarios._id": idComentario }, { $set: { "comentarios.$.comentario": comentario } },{new:true})
+            const modificarComentario = await Itinerary.findOneAndUpdate({ _id: id, "comentarios._id": idComentario }, { $set: { "comentarios.$.comentario": comentario } },{new:true}).populate({ path: "comentarios", populate: { path: "idUser", select: { "usuario":1, "nombre": 1, "apellido": 1, "mail": 1 } } })
             modificarComentario.save()
             respuesta = modificarComentario
         } catch(error) {

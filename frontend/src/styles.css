@@ -395,7 +395,6 @@ footer{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
 }
 
 .noHayItinerarios{
@@ -581,7 +580,6 @@ p{
 .activities{
   height: 100%;
   width: 75%;
-  background-color: rgba(253,187,45,1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -615,20 +613,47 @@ p{
 .comentarios{
   height: 100%;
   width: 100%;
-  background-color: rgb(47, 74, 226);
 }
 
 .enviarComentario{
-  background-color: coral;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2em;
   width: 30vw;
 }
 
-.enviarComentario > input{
-  width: 25vw;
+.inputComentar{
+  display: flex;
 }
 
-.enviarComentario > button{
-  width: 5vw;
+.inputComentar > input{
+  width: 20vw;
+  background-color: transparent;
+  border: 1px solid white;
+  padding-left: 10px;
+}
+
+.inputComentar > input::placeholder{
+  color: aliceblue;
+}
+
+.inputComentar > input:focus{
+  background-color: white;
+}
+
+.inputComentar > div{
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 10px;
+}
+
+.inputComentar > p{
+  color: white;
 }
 
 .cajaComentario{
@@ -638,27 +663,93 @@ p{
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  background-color: white;
+/*   background-color: white; */
 }
 
 .cajaDeComentarios{
-  height: 70vh;
+  height: 60vh;
   width: 30vw;
-  background-color: blue;
   overflow: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 2px solid white;
 }
 
-.comentario{
-  background-color: coral;
-  height: 5vh;
+.comentario, .comentarioDos{
+  min-height: 7vh;
   width: 90%;
   margin: 5px 0 5px 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(80,104,255);
+  background: linear-gradient(0deg, rgba(80,104,255,1) 0%, rgba(176,215,255,0.87718837535014) 62%);
+  border-radius: 0 50px 50px 50px;
+  box-shadow: 2px 2px 2px 4px gray;
+}
+
+.comentarioDos{
+  background: rgb(34,195,55);
+  background: linear-gradient(0deg, rgba(34,195,55,1) 0%, rgba(45,253,247,1) 100%);
+  color: white;
+}
+
+.comentarioNombre{
+  width: 90%;
+  margin: 8px 0 8px 0;
+}
+
+.comentarioNombre > p{
+  margin: 0;
+  padding: 0;
+}
+
+.comentarioNombre > *{
+  margin: 0 0 0 20px;
+}
+
+.likeDisLike{
+  width: 40px;
+  cursor: pointer;
+}
+
+.likeDisLike:hover{
+  transform: scale(1.1);
+}
+
+.borrarYModificar{
+  width: 30px;
+  cursor: pointer;
+}
+
+.divBorrarYModificar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 10px 0 0;
+  width: 6vw;
+  opacity: 0;
+}
+
+.comentario:hover, .comentarioDos:hover .divBorrarYModificar{
+  opacity: 1;
+}
+
+.divComentario{
+  margin: 0 0 0 12px;
+  padding-left: 1em;
+}
+
+.divComentario > span{
+  width: 5vw;
+}
+
+.modificarComentario{
+  position: absolute;
+  z-index: 1;
+  margin-bottom: 1px;
 }
 
 /* Planet */

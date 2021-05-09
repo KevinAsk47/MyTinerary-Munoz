@@ -1,13 +1,37 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Activities from "./Activities";
 import Comments from "./Comments";
+import likesActions from '../redux/actions/likesActions';
+import { ToastContainer, toast } from 'react-toastify';
+import { connect } from 'react-redux';
 
 const Itinerary = (props) => {
 
     const [verMas, setVerMas] = useState(false)
+    const [liked, setLiked] = useState([])
+    const [usuario, setUsuario] = useState({ token: localStorage.getItem('token') })
+    const [flag, setFlag] = useState(false)
+    const [agregarComentario, setAgregarComentario] = useState(props.itinerario.comentarios)
+
+    useEffect(() => {
+        setLiked(props.itinerario.userLiked)
+        if (props.usuario && props.itinerario.userLiked.includes(props.usuario.mail)) {
+            setFlag(true)
+        }
+    },[])
 
     const ver = () => {
         setVerMas(!verMas)
+    }
+
+    const likes = async () => {
+        if (props.usuario) {
+            var respuesta = await props.likear(props.itinerario._id, usuario)
+            setLiked(respuesta.likeItinerario.userLiked)
+            setFlag(!respuesta.flag)
+        }else{
+            toast.warn("You must log in to perform this action ⚠️")
+        }
     }
 
     return (
@@ -40,8 +64,11 @@ const Itinerary = (props) => {
                             <img style={{ width: '50px' }} src="/img/reloj.png" alt="" />
                         </div>
                         <div className="likes">
-                            <p>{props.itinerario.likes}</p>
-                            <img style={{ width: '50px' }} src="/img/me-gusta.png" alt="" />
+                            <p>{liked.length}</p>
+                            {
+                                !flag ? <img onClick={likes} className="likeDisLike" src="/img/me-gusta.png" alt="" />
+                                : <img onClick={likes} className="likeDisLike" src="/img/no-me-gusta.png" alt="" />
+                            }
                         </div>
                     </div>
                     <div className="comentarios">
@@ -50,8 +77,12 @@ const Itinerary = (props) => {
                                 <div className="activities">
                                     <Activities idItinerario={props.itinerario._id} />
                                 </div>
-                                <div className="comentarios">
-                                    <Comments comentarios={props.itinerario.comentarios} idItinerario={props.itinerario._id} />
+                                <div>
+                                    <Comments
+                                    idItinerario={props.itinerario._id} 
+                                    agregarComentario={agregarComentario}
+                                    setAgregarComentario={setAgregarComentario}
+                                    />
                                 </div>
                             </div>
                         }
@@ -61,8 +92,28 @@ const Itinerary = (props) => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
         </div>
     )
 }
 
-export default Itinerary
+const mapStateToProps = state => {
+    return {
+        usuario: state.users.users,
+    }
+}
+
+const mapDispatchToProps = {
+    likear: likesActions.likearItinerario,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary)

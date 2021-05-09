@@ -2,16 +2,13 @@ import { useEffect, useState } from "react"
 import { connect } from 'react-redux';
 import commentsActions from '../redux/actions/commentsActions';
 import Comment from "./Comment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Comments = (props) => {
-
     const [comentario, setComentario] = useState({ comentario: "", token: localStorage.getItem('token') })
     const [comentarioActualizado, setComentarioActualizado] = useState({ token: localStorage.getItem('token') })
-    const [agregarComentario, setAgregarComentario] = useState([])
-
-    useEffect(() => {
-        setAgregarComentario(props.comentarios)
-    },[])
+    const { agregarComentario, setAgregarComentario } = props
 
     const leerInput = (e) => {
         let name = e.target.name
@@ -24,8 +21,13 @@ const Comments = (props) => {
 
     const comentar = async (e) => {
         e.preventDefault()
-        var respuesta = await props.fetchComentarios(comentario, props.idItinerario)
-        setAgregarComentario(respuesta)
+        if (comentario.comentario === "") {
+            toast.error("You cannot send an empty comment")
+        } else {
+            var respuesta = await props.fetchComentarios(comentario, props.idItinerario)
+            setAgregarComentario(respuesta)
+            setComentario({ comentario: "", token: localStorage.getItem('token') })
+        }
     }
 
     const borrarComentario = async (id) => {
@@ -33,45 +35,43 @@ const Comments = (props) => {
         setAgregarComentario(respuesta)
     }
 
-    const enviarComentarioActualizado = async ( e, id, comentarioAModificar ) => {
-        setComentarioActualizado({...comentarioActualizado,...comentarioAModificar})
+    const enviarComentarioActualizado = async (e, id, comentarioAModificar) => {
+        setComentarioActualizado({ ...comentarioActualizado, ...comentarioAModificar })
         if (e.key === "Enter") {
             var respuesta = await props.actualizarComentario(comentarioActualizado, props.idItinerario, id)
             setAgregarComentario(respuesta)
         }
     }
 
-    console.log(agregarComentario)
-    console.log(props.comentarios)
-
     return (
         <>
             <div className="cajaComentario">
                 <div className="cajaDeComentarios">
                     {
-                        props.usuario ? agregarComentario.map((comentario) => {
+                        agregarComentario.map((comentario) => {
                             return <Comment
-                            key={comentario._id} 
-                            borrarComentario={borrarComentario} 
-                            enviarComentarioActualizado={enviarComentarioActualizado}
-                            comentario={comentario}
-                            agregarComentario={agregarComentario}
+                                key={comentario._id}
+                                borrarComentario={borrarComentario}
+                                enviarComentarioActualizado={enviarComentarioActualizado}
+                                comentario={comentario}
+                                agregarComentario={agregarComentario}
                             />
-                        }) :
-                            props.comentarios.map((comentario) => {
-                                return (
-                                    <div key={comentario._id} className="comentario">
-                                        <p>{comentario.idUser.nombre}</p> 
-                                        <p style={{ color: 'red' }}>{comentario.comentario}</p>
-                                    </div>
-                                )
-                            })
+                        })
                     }
                 </div>
-                <form className="enviarComentario">
-                    <input type="text" onChange={leerInput} value={comentario.comentario} name="comentario" />
-                    <button type="submit" onClick={comentar}>Enviar</button>
-                </form>
+                {
+                    props.usuario ?
+                    <form className="enviarComentario">
+                        <p>Leave us your comment here!</p>
+                        <div className="inputComentar">
+                            <input type="text" onChange={leerInput} value={comentario.comentario} name="comentario" placeholder="Hello!" />
+                            <div type="submit" onClick={comentar} style={{backgroundImage: `url(/img/enviar.png)`}}></div>
+                        </div>
+                    </form> : 
+                    <div style={{marginTop: '3em'}}>
+                        <p>You must sign in to make a comment.</p>
+                    </div>
+                }
             </div>
         </>
     )

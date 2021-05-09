@@ -7,12 +7,14 @@ const validador = require('../config/validador')
 const passport = require('passport')
 const activityControllers = require('../controllers/activityControllers')
 const commentControllers = require('../controllers/CommentControllers')
+const likesControllers = require('../controllers/likesControllers')
 
 const { todasLasCiudades, agregarCiudad, ciudadIndividual, borrarCiudad, actualizarCiudad } = cityControllers
 const { agregarItinerario, todosLosItinerarios, borrarItinerario, actualizarItinerario, itinerarioIndividual, itinerariosPorCiudad } = itineraryControllers
 const { registrarUsuario, loagearUsuario, loginForzado } = userControllers
 const { cargarActividad, actividadesPorItinerario } = activityControllers
 const { cargarComentario, borrarComentario, modificarComentario } = commentControllers
+const { likear } = likesControllers
 
 router.route('/ciudades')
 .get(todasLasCiudades)
@@ -54,5 +56,8 @@ router.route('/comentario/:id')
 .post(passport.authenticate('jwt', {session: false}), cargarComentario)
 .delete(borrarComentario)
 .put(passport.authenticate('jwt', {session: false}), modificarComentario)
+
+router.route('/like/:id')
+.post(passport.authenticate('jwt', {session: false}), likear)
 
 module.exports = router

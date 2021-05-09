@@ -1,7 +1,7 @@
 const initialState = {
     users: null,
     tostada: null,
-    exito: false
+    exito: false,
 }
 
 const ciudadesReducer = (state = initialState, action) => {
