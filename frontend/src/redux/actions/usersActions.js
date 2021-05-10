@@ -56,12 +56,12 @@ const articulosActions = {
             } 
         }
     },
-    exitoso: (respuesta) => {
+    exitoso: () => {
         return (dispatch, getState) => {
             dispatch({type: 'EXITOSO', payload: true})
         }
     },
-    desmontarTostada: (respuesta) => {
+    desmontarTostada: () => {
         return (dispatch, getState) => {
             dispatch({type: 'EXITOSO', payload: false})
         }

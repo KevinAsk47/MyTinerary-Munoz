@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class Home extends React.Component {
-
     componentDidMount = () => {
         if (this.props.tostada) {
             setTimeout(()=>{

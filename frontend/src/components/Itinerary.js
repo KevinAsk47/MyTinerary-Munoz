@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { connect } from 'react-redux';
 
 const Itinerary = (props) => {
-
     const [verMas, setVerMas] = useState(false)
     const [liked, setLiked] = useState([])
     const [loadingLiked, setLoadingLike] = useState(true)
@@ -71,7 +70,7 @@ const Itinerary = (props) => {
                             <img onClick={loadingLiked ? likes : null} className="likeDisLike" src={!flag ? "/img/me-gusta.png" : "/img/no-me-gusta.png" } alt="" />
                         </div>
                     </div>
-                    <div className="comentarios">
+                    <div id="prueba" className="comentarios">
                         {
                             verMas && <div className="masInfoItinerario">
                                 <div className="activities">

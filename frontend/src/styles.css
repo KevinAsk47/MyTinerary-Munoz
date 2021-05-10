@@ -769,6 +769,10 @@ p{
   text-align: center;
 }
 
+/* #prueba{
+  overflow: hidden;
+} */
+
 /* Planet */
 
 @keyframes mapfront_spin {
