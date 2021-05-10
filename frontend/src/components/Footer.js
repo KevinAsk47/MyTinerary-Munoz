@@ -24,7 +24,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="redesDiv">
-                    <h3 style={{ color: 'black', borderBottom: '1px solid' }}>Redes Sociales</h3>
+                    <h3 style={{ color: 'black', borderBottom: '1px solid' }}>Social media</h3>
                     <img className="redesImg" style={{ width: '10vw' }} src="/img/redes.png" alt="" />
                 </div>
             </div>

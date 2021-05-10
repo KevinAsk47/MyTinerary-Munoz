@@ -9,6 +9,7 @@ const Itinerary = (props) => {
 
     const [verMas, setVerMas] = useState(false)
     const [liked, setLiked] = useState([])
+    const [loadingLiked, setLoadingLike] = useState(true)
     const [usuario, setUsuario] = useState({ token: localStorage.getItem('token') })
     const [flag, setFlag] = useState(false)
     const [agregarComentario, setAgregarComentario] = useState(props.itinerario.comentarios)
@@ -26,9 +27,11 @@ const Itinerary = (props) => {
 
     const likes = async () => {
         if (props.usuario) {
-            var respuesta = await props.likear(props.itinerario._id, usuario)
-            setLiked(respuesta.likeItinerario.userLiked)
-            setFlag(!respuesta.flag)
+            setLoadingLike(false)
+                var respuesta = await props.likear(props.itinerario._id, usuario)
+                setLiked(respuesta.likeItinerario.userLiked)
+                setFlag(!respuesta.flag)
+            setLoadingLike(true)
         }else{
             toast.warn("You must log in to perform this action ⚠️")
         }
@@ -55,7 +58,7 @@ const Itinerary = (props) => {
                         <div className="billetes">
                             {
                                 Array(props.itinerario.precio).fill(props.itinerario.precio).map((billete, index) => {
-                                    return (<img key={index} style={{ width: '50px', margin: '5px' }} src="/img/division.png" alt="" />)
+                                    return (<img key={index} src="/img/division.png" alt="" />)
                                 })
                             }
                         </div>
@@ -63,12 +66,9 @@ const Itinerary = (props) => {
                             <p>{props.itinerario.duracion}hs</p>
                             <img style={{ width: '50px' }} src="/img/reloj.png" alt="" />
                         </div>
-                        <div className="likes">
+                        <div className="likes"> 
                             <p>{liked.length}</p>
-                            {
-                                !flag ? <img onClick={likes} className="likeDisLike" src="/img/me-gusta.png" alt="" />
-                                : <img onClick={likes} className="likeDisLike" src="/img/no-me-gusta.png" alt="" />
-                            }
+                            <img onClick={loadingLiked ? likes : null} className="likeDisLike" src={!flag ? "/img/me-gusta.png" : "/img/no-me-gusta.png" } alt="" />
                         </div>
                     </div>
                     <div className="comentarios">

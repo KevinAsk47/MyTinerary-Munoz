@@ -50,7 +50,6 @@ const commentControllers = {
         const id = req.params.id
         const { comentario } = req.body.info
         const { idComentario } = req.body
-        const idUser = req.user._id
 
         var respuesta;
         var error;

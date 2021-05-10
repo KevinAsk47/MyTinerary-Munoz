@@ -101,7 +101,7 @@ const Forms = (props) => {
         if (response.profileObj.email) {
             const { givenName, email, googleId, imageUrl, familyName } = response.profileObj
             if (props.form) {
-                enviarDatos(null, { nombre: givenName, apellido: familyName, usuario: "us"+1, mail: email, contraseña: googleId, imagen: imageUrl, pais: "ninguno", ingresoGoogle: true })
+                enviarDatos(null, { nombre: givenName, apellido: familyName, usuario: givenName, mail: email, contraseña: googleId, imagen: imageUrl, pais: "ninguno", ingresoGoogle: true })
             } else {
                 enviarDatos(null, { mail: email, contraseña: googleId, ingresoGoogle: true })
             }

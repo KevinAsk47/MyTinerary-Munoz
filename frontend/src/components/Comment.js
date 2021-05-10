@@ -24,6 +24,13 @@ const Comment = (props) => {
         })
     }
 
+    const holanda = (e) => {
+        if (e.key === "Enter") {
+            enviarComentarioActualizado(comentario._id, comentarioAModificar)
+            setModificar(false)
+        }
+    }
+
     const AbrirModificarComentario = () => {
         setModificar(!modificar)
     }
@@ -47,7 +54,7 @@ const Comment = (props) => {
                             <input
                                 className="modificarComentario"
                                 type="text"
-                                onKeyPress={(e) => enviarComentarioActualizado(e, comentario._id, comentarioAModificar)}
+                                onKeyPress={holanda}
                                 onChange={leerInput} value={comentarioAModificar.comentario}
                                 name="comentario"
                             />

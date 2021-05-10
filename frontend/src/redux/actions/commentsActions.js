@@ -30,12 +30,9 @@ const articulosActions = {
     },
 
     actualizarComentario: (info , idItinerario , id) => {
+        console.log(info)
         return async (dispatch, getState) => {
-            var respuesta = await axios.put('http://localhost:4000/api/comentario/' + idItinerario,{info: info, idComentario: id}, {
-                headers: {
-                    'Authorization': 'Bearer '+ info.token
-                }
-            })
+            var respuesta = await axios.put('http://localhost:4000/api/comentario/' + idItinerario,{info: info, idComentario: id})
             if (respuesta.data.success) {
                 return respuesta.data.respuesta.comentarios
             }

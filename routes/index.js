@@ -55,7 +55,7 @@ router.route('/actividades/itinerario/:id')
 router.route('/comentario/:id')
 .post(passport.authenticate('jwt', {session: false}), cargarComentario)
 .delete(borrarComentario)
-.put(passport.authenticate('jwt', {session: false}), modificarComentario)
+.put(modificarComentario)
 
 router.route('/like/:id')
 .post(passport.authenticate('jwt', {session: false}), likear)

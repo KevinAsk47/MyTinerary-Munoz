@@ -271,12 +271,12 @@ footer{
 }
 
 .fotoPresentacion{
-  min-width: 10vw;
-  height: 20vh;
-  left: 15em;
+  width: 13vw;
+  height: 25vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  left: 15em;
   background-color: white;
   border-radius: 50%;
   border: 3px solid black;
@@ -340,6 +340,11 @@ footer{
   width: 25vw;
 }
 
+.billetes > img{
+  width: 50px;
+  margin: 5px;
+}
+
 .reloj, .likes{
   width: 10vw;
   display: flex;
@@ -391,7 +396,7 @@ footer{
 }
 
 .masInfoItinerario{
-  height: 80vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -578,7 +583,7 @@ p{
 }
 
 .activities{
-  height: 100%;
+  height: 100vh;
   width: 75%;
   display: flex;
   flex-direction: column;
@@ -663,18 +668,21 @@ p{
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-/*   background-color: white; */
 }
 
 .cajaDeComentarios{
   height: 60vh;
   width: 30vw;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 2px solid white;
+}
+
+.cajaDeComentarios > h2 {
+  color:#f1f1f1;
 }
 
 .comentario, .comentarioDos{
@@ -740,6 +748,10 @@ p{
 .divComentario{
   margin: 0 0 0 12px;
   padding-left: 1em;
+  width: 12em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: initial;
 }
 
 .divComentario > span{
@@ -750,6 +762,11 @@ p{
   position: absolute;
   z-index: 1;
   margin-bottom: 1px;
+}
+
+.noLogin{
+  margin-top: 3em;
+  text-align: center;
 }
 
 /* Planet */
@@ -950,6 +967,19 @@ p{
 
 /* media */
 
+@media (max-width:1050px){
+  .nombreGuia{
+    height: 8%;
+    width: 25%;
+  }
+  .bannerPresentacion{
+    width: 100%;
+  }
+  .bannerPresentacion h2{
+    font-size: 25px;
+  }
+}
+
 @media (max-width:576px){
   .tituloCity{
     width: 100%;
@@ -1015,10 +1045,37 @@ p{
     height: 65vh;
     width: 80%;
   }
+  .masInfoItinerario{
+    flex-wrap: wrap;
+  }
   .billetes{
     height: 55px;
     display: flex;
     flex-wrap: wrap;
+  }
+  .billetes > img{
+    width: 25px;
+  }
+  .cajaComentario{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .cajaDeComentarios{
+    height: 60vh;
+    width: 100vw;
+  }
+  .enviarComentario{
+    width: 100vw;
+  }
+  .enviarComentario > input{
+    width: 60vw;
+  }
+  .inputComentar > input{
+    width: 55vw;
   }
 }
 
