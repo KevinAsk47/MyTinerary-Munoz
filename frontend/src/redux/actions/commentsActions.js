@@ -30,7 +30,6 @@ const articulosActions = {
     },
 
     actualizarComentario: (info , idItinerario , id) => {
-        console.log(info)
         return async (dispatch, getState) => {
             var respuesta = await axios.put('http://localhost:4000/api/comentario/' + idItinerario,{info: info, idComentario: id})
             if (respuesta.data.success) {
