@@ -4,7 +4,7 @@ const articulosActions = {
     fetchCiudades: () => {
         return async (dispatch, getState) => {
             try {
-                var respuesta = await fetch("http://localhost:4000/api/ciudades")
+                var respuesta = await fetch("https://mytinerary-m.herokuapp.com/api/ciudades")
                 var data = await respuesta.json()
                 if (!data.success) {
                     console.log(data.repuesta)
@@ -20,7 +20,7 @@ const articulosActions = {
     fetchItinerarios: (id) => {
         return async (dispatch, getState) => {
             try {
-                var respuesta = await fetch("http://localhost:4000/api/itinerarios/ciudad/" + id)
+                var respuesta = await fetch("https://mytinerary-m.herokuapp.com/api/itinerarios/ciudad/" + id)
                 var data = await respuesta.json()
                 if (!data.success) {
                     dispatch({ type: 'ERROR', payload: true })

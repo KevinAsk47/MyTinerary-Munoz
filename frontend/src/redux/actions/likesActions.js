@@ -3,7 +3,7 @@ import axios from 'axios'
 const articulosActions = {
     likearItinerario: ( id, info ) => {
         return async (dispatch, getState) => {
-            var respuesta = await axios.post('http://localhost:4000/api/like/' + id, info ,{
+            var respuesta = await axios.post('https://mytinerary-m.herokuapp.com/api/like/' + id, info ,{
                 headers: {
                     'Authorization': 'Bearer '+ info.token
                 }

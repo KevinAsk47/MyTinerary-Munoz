@@ -4,7 +4,7 @@ const articulosActions = {
     fetchComentarios: (info,id) => {
         return async (dispatch, getState) => {
             try {
-                var respuesta = await axios.post('http://localhost:4000/api/comentario/'+id , info, {
+                var respuesta = await axios.post('https://mytinerary-m.herokuapp.com/api/comentario/'+id , info, {
                     headers: {
                         'Authorization': 'Bearer '+ info.token
                     }
@@ -20,7 +20,7 @@ const articulosActions = {
 
     borrarComentario: (id , idItinerario) => {
         return async (dispatch, getState) => {
-            var respuesta = await axios.delete('http://localhost:4000/api/comentario/' + idItinerario, {
+            var respuesta = await axios.delete('https://mytinerary-m.herokuapp.com/api/comentario/' + idItinerario, {
                 data: { idComentario: id } 
             })
             if (respuesta.data.success) {
@@ -31,7 +31,7 @@ const articulosActions = {
 
     actualizarComentario: (info , idItinerario , id) => {
         return async (dispatch, getState) => {
-            var respuesta = await axios.put('http://localhost:4000/api/comentario/' + idItinerario,{info: info, idComentario: id})
+            var respuesta = await axios.put('https://mytinerary-m.herokuapp.com/api/comentario/' + idItinerario,{info: info, idComentario: id})
             if (respuesta.data.success) {
                 return respuesta.data.respuesta.comentarios
             }

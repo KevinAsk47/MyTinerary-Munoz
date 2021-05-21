@@ -4,7 +4,7 @@ const articulosActions = {
     nuevoUsuario: (nuevoUsuario) => {
         return async (dispatch, getState) => {
             try {
-                var respuesta = await axios.post('http://localhost:4000/api/userSignUp', nuevoUsuario)
+                var respuesta = await axios.post('https://mytinerary-m.herokuapp.com/api/userSignUp', nuevoUsuario)
                 if (!respuesta.data.success) {
                     return respuesta.data.errores || respuesta.data.error
                 }
@@ -19,7 +19,7 @@ const articulosActions = {
     loguearUsuario: (usuarioLogueado) => {
         return async (dispatch, getState) => {
             try {
-                var respuesta = await axios.post('http://localhost:4000/api/userLogIn', usuarioLogueado)
+                var respuesta = await axios.post('https://mytinerary-m.herokuapp.com/api/userLogIn', usuarioLogueado)
                 if (!respuesta.data.success) {
                     return respuesta.data.error
                 }
@@ -40,7 +40,7 @@ const articulosActions = {
     loginForzadoPorLS: (usuarioLS) => {
         return async (dispatch, getState) => {
             try {
-                const respuesta = await axios.get('http://localhost:4000/api/user/loginLS', {
+                const respuesta = await axios.get('https://mytinerary-m.herokuapp.com/api/user/loginLS', {
                 headers: {
                     'Authorization': 'Bearer '+usuarioLS.token
                 }
