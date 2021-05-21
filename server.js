@@ -15,6 +15,7 @@ app.use(express.json())
 app.use('/api', router)
 
 if(process.env.NODE_ENV === 'production'){
+    console.log("estoy aca")
     app.use(express.static('client/build'))
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname+"/client/build/index.html"))
@@ -24,4 +25,4 @@ if(process.env.NODE_ENV === 'production'){
 const port = process.env.PORT
 const host = process.env.HOST || '0.0.0.0'
 
-app.listen(port, host, () => console.log("App listening on port" + port + "on" + host))
+app.listen(port, host, () => console.log("App listening on port " + port + " on " + host))
