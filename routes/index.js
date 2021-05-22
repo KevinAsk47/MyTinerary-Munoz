@@ -6,7 +6,7 @@ const userControllers = require('../controllers/userControllers')
 const validador = require('../config/validador')
 const passport = require('passport')
 const activityControllers = require('../controllers/activityControllers')
-const commentControllers = require('../controllers/CommentControllers')
+const commentControllers = require('../controllers/commentControllers')
 const likesControllers = require('../controllers/likesControllers')
 
 const { todasLasCiudades, agregarCiudad, ciudadIndividual, borrarCiudad, actualizarCiudad } = cityControllers
